@@ -10,24 +10,26 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    INPUT: PDF 문서                               │
+│                 INPUT:  (복수 PDF)                   │
 └──────────────────────────┬──────────────────────────────────────┘
                            │
                            ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  STEP 1: PDF 전처리  [step1_preprocess_pdf.py]                   │
 │                                                                 │
-│  PyMuPDF(fitz) → 페이지별 텍스트 추출 → refined_context.json     │
+│  ./data/ 내 모든 PDF 자동 순회                                    │
+│  PyMuPDF(fitz) → 페이지별 텍스트 추출                             │
 │                                                                 │
-│  출력: { "page": 1, "content": "..." }  × N페이지               │
+│  출력: { "source": "파일명.pdf", "page": 1, "content": "..." }   │
+│        → output/context/refined_context.json                   │
 └──────────────────────────┬──────────────────────────────────────┘
-                           │  refined_context.json
+                           │  output/context/refined_context.json
                            ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  STEP 2: 다국어 QA 생성  [step2_generate_qa.py]                  │
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐   │
-│  │  언어별 루프 (KO / EN / ID / UZ)                         │   │
+│  │  언어별 루프 (KO / EN / ID / VI / UZ)                    │   │
 │  │                                                         │   │
 │  │  ┌─────────────────────────────────────────────────┐   │   │
 │  │  │  난이도별 루프                                    │   │   │
@@ -39,15 +41,11 @@
 │  │  │                    ▼                            │   │   │
 │  │  │          Ollama 로컬 모델 호출                   │   │   │
 │  │  │  ┌─────────────────────────────────────────┐   │   │   │
-│  │  │  │  KO: qwen2.5:32b / exaone3.5:32b        │   │   │   │
-│  │  │  │  EN: llama3.1:8b / qwen2.5:32b          │   │   │   │
-│  │  │  │  ID: qwen2.5:32b / llama3.1:8b          │   │   │   │
-│  │  │  │  UZ: qwen2.5:32b / llama3.1:8b          │   │   │   │
+│  │  │  │  전 언어: qwen2.5:7b                     │   │   │   │
 │  │  │  └─────────────────────────────────────────┘   │   │   │
 │  │  │                    │                            │   │   │
 │  │  │                    ▼                            │   │   │
 │  │  │          LLM-as-Judge 검증                      │   │   │
-│  │  │          (생성 모델 ≠ 검증 모델)                  │   │   │
 │  │  │                    │                            │   │   │
 │  │  │          ┌─────────┴──────────┐                │   │   │
 │  │  │          │ 통과               │ 실패            │   │   │
@@ -59,8 +57,8 @@
 │  번역 방향: 언어별 독립 생성 (직접 생성, 번역 아님)               │
 │  번역 도구: facebook/nllb-200 (우즈벡어 등 저자원 언어 보조용)    │
 │                                                                 │
-│  출력: qa_ko_raw.json / qa_en_raw.json / ...                   │
-│        qa_dataset_raw.json (통합)                               │
+│  출력: output/qa_raw/qa_ko_raw.json / qa_en_raw.json / ...     │
+│        output/qa_raw/qa_dataset_raw.json (통합)                 │
 └──────────────────────────┬──────────────────────────────────────┘
                            │  qa_dataset_raw.json
                            ▼
@@ -99,10 +97,10 @@
   "difficulty": "EASY",
   "question": "졸업 이수 학점은 몇 학점인가요?",
   "answer": "졸업 이수 학점은 총 130학점이며...",
-  "ref_pages": [3],
+  "ref_pages": [{"source": "2026학년도1학기학사안내.pdf", "page": 3}],
   "topic_key": "graduation credits",
-  "model": "qwen2.5:32b",
-  "validator": "llama3.1:8b",
+  "model": "qwen2.5:7b",
+  "validator": "qwen2.5:7b",
   "is_valid": true,
   "valid_reason": "Answer is directly supported by context",
   "elapsed_sec": 4.2,

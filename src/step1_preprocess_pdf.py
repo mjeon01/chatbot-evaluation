@@ -9,21 +9,14 @@ import sys
 from pathlib import Path
 
 
-def preprocess_pdf(pdf_path: str, output_json: str) -> None:
+def preprocess_pdf(pdf_path: str) -> list:
     print("\n" + "="*60)
-    print("  📄 Step 1: PDF 전처리 시작")
-    print("="*60)
-    print(f"  입력 파일: {pdf_path}")
-    print(f"  출력 파일: {output_json}")
+    print(f"  처리 중: {Path(pdf_path).name}")
     print("-"*60)
-
-    if not Path(pdf_path).exists():
-        print(f"  ❌ 오류: '{pdf_path}' 파일을 찾을 수 없습니다.")
-        sys.exit(1)
 
     doc = fitz.open(pdf_path)
     total_pages = len(doc)
-    print(f"  📖 총 {total_pages} 페이지 감지됨. 추출 시작...\n")
+    print(f"  총 {total_pages} 페이지 감지됨. 추출 시작...\n")
 
     structured_data = []
     skipped = 0
@@ -34,31 +27,40 @@ def preprocess_pdf(pdf_path: str, output_json: str) -> None:
 
         if text:
             structured_data.append({
+                "source": Path(pdf_path).name,
                 "page": page_num,
                 "content": text
             })
-            # 진행 상황 출력 (5페이지마다 또는 마지막 페이지)
             if page_num % 5 == 0 or page_num == total_pages:
                 preview = text[:60].replace("\n", " ")
-                print(f"  ✅ [{page_num:>3}/{total_pages}] 추출 성공 | 미리보기: \"{preview}...\"")
+                print(f"  [{page_num:>3}/{total_pages}] 추출 성공 | 미리보기: \"{preview}...\"")
         else:
             skipped += 1
-            print(f"  ⚠️  [{page_num:>3}/{total_pages}] 빈 페이지 스킵")
+            print(f"  [{page_num:>3}/{total_pages}] 빈 페이지 스킵")
 
-    with open(output_json, "w", encoding="utf-8") as f:
-        json.dump(structured_data, f, ensure_ascii=False, indent=4)
-
-    print("\n" + "-"*60)
-    print(f"  ✅ 전처리 완료!")
-    print(f"  📊 추출된 페이지: {len(structured_data)}개")
-    print(f"  ⚠️  스킵된 페이지: {skipped}개")
-    print(f"  💾 저장 위치: {output_json}")
-    print("="*60 + "\n")
+    print(f"\n  추출된 페이지: {len(structured_data)}개 / 스킵: {skipped}개")
+    return structured_data
 
 
 if __name__ == "__main__":
-    # 사용 예시
-    PDF_PATH = "document.pdf"
-    OUTPUT_JSON = "refined_context.json"
+    DATA_DIR = "./data"
+    OUTPUT_JSON = "./output/context/refined_context.json"
 
-    preprocess_pdf(PDF_PATH, OUTPUT_JSON)
+    pdf_files = sorted(Path(DATA_DIR).glob("*.pdf"))
+    if not pdf_files:
+        print(f"오류: '{DATA_DIR}'에 PDF 파일이 없습니다.")
+        sys.exit(1)
+
+    Path(OUTPUT_JSON).parent.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n총 {len(pdf_files)}개의 PDF 파일을 처리합니다.")
+    all_data = []
+    for pdf_path in pdf_files:
+        all_data.extend(preprocess_pdf(str(pdf_path)))
+
+    with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
+        json.dump(all_data, f, ensure_ascii=False, indent=4)
+
+    print("\n" + "="*60)
+    print(f"  전체 완료! 총 {len(all_data)}개 페이지 → {OUTPUT_JSON}")
+    print("="*60 + "\n")

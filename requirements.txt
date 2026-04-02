@@ -1,0 +1,10 @@
+# PDF 처리 (step1)
+PyMuPDF>=1.23.0
+
+# 번역 모델 - Facebook NLLB (step2)
+transformers>=4.40.0
+torch>=2.0.0
+sentencepiece>=0.1.99
+
+# Ollama API 호출 (step2)
+requests>=2.31.0
