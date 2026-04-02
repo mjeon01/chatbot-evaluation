@@ -54,7 +54,7 @@ def rule_based_filter(item: dict) -> tuple[bool, str]:
         return False, "질문이 너무 김 (> 500자)"
     if a.lower() in q.lower():
         return False, "질문에 답변 포함됨"
-    if not item.get("ref_pages"):
+    if not item.get("ref_pages") and not item.get("is_not_answerable"):
         return False, "참조 페이지 없음"
 
     return True, "통과"
@@ -92,26 +92,38 @@ def print_statistics(items: list, title: str = "통계") -> None:
     for item in items:
         by_lang[item["language"]].append(item)
 
+    diff_order = ["EASY", "MIDDLE", "HARD", "NOT_ANSWERABLE"]
+
     print("  [언어별]")
     for lang, lang_items in sorted(by_lang.items()):
-        by_diff = defaultdict(int)
+        by_diff  = defaultdict(int)
         by_model = defaultdict(int)
+        na_count = 0
         for it in lang_items:
             by_diff[it["difficulty"]] += 1
-            by_model[it["model"]] += 1
+            by_model[it["model"].split("/")[-1]] += 1
+            if it.get("is_not_answerable"):
+                na_count += 1
 
-        diff_str  = " / ".join(f"{d}:{c}" for d, c in sorted(by_diff.items()))
-        model_str = ", ".join(f"{m.split(':')[0]}:{c}" for m, c in sorted(by_model.items()))
-        print(f"  ✅ {lang.upper()}: {len(lang_items):>3}개  |  난이도: {diff_str}")
-        print(f"  모델: {model_str}")
+        diff_str  = " / ".join(
+            f"{d}:{by_diff[d]}" for d in diff_order if by_diff[d]
+        )
+        model_str = ", ".join(f"{m}:{c}" for m, c in sorted(by_model.items()))
+        na_tag    = f"  (NA:{na_count}개)" if na_count else ""
+        print(f"  ✅ {lang.upper()}: {len(lang_items):>3}개  |  난이도: {diff_str}{na_tag}")
+        print(f"     모델: {model_str}")
 
+    diff_order = ["EASY", "MIDDLE", "HARD", "NOT_ANSWERABLE"]
     print(f"\n  [난이도별]")
     by_diff = defaultdict(int)
     for item in items:
         by_diff[item["difficulty"]] += 1
-    for diff, count in sorted(by_diff.items()):
-        bar = "█" * (count // 5)
-        print(f"  {diff:<8}: {count:>3}개  {bar}")
+    for diff in diff_order:
+        count = by_diff.get(diff, 0)
+        if count:
+            bar = "█" * (count // 5)
+            tag = " ← 환각탐지" if diff == "NOT_ANSWERABLE" else ""
+            print(f"  {diff:<16}: {count:>3}개  {bar}{tag}")
 
     print(f"\n  [모델별]")
     by_model = defaultdict(int)

@@ -1,22 +1,27 @@
 """
 Step 2: 다국어 QA 합성 데이터 생성
-refined_context.json → 언어별 50개 × 5언어 = 250개 QA → qa_dataset_raw.json
 
-- 번역: facebook/nllb (HuggingFace)
-- 생성: Ollama 로컬 모델 (qwen2.5:7b 등)
-- 난이도: EASY / MIDDLE / HARD
-- 페르소나: LLM이 자동 생성 (국가/TOPIK 수준/상황)
+워크플로우:  python src/step2_generate_qa.py
+  --stage ko          : 한국어 QA 생성 → 검수 파일 저장
+  --stage en          : 검수된 한국어 → 영어 번역
+  --stage multilingual: 영어 → ID / VI / UZ 번역
+  --stage all         : 전체 언어 직접 생성 (검수 단계 없음)
 """
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
+os.environ["PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"] = "True"
+
+import argparse
 import json
 import time
 import random
-import requests
 from datetime import datetime
-from transformers import pipeline
+from pathlib import Path
 
-#  설정
-OLLAMA_URL = "http://localhost:11434/api/generate"
+from vllm import LLM, SamplingParams
+
+MODEL_PATH = "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8"
 
 LANGUAGES = {
     "ko": {"name": "Korean",      "nllb_code": "kor_Hang"},
@@ -26,114 +31,117 @@ LANGUAGES = {
     "uz": {"name": "Uzbek",       "nllb_code": "uzn_Latn"},
 }
 
+TRANSLATION_CHAIN = {
+    "en": "ko",  # 한국어 → 영어
+    "id": "en",  # 영어 → 인도네시아어
+    "vi": "en",  # 영어 → 베트남어
+    "uz": "en",  # 영어 → 우즈벡어
+}
+
+LANG_COUNTRY = {
+    "en": "USA",
+    "id": "Indonesia",
+    "vi": "Vietnam",
+    "uz": "Uzbekistan",
+}
+
 DIFFICULTIES = {
-    "EASY":   {"count": 17, "pages_needed": 1,    "desc": "Simple fact from a single page"},
-    "MIDDLE": {"count": 17, "pages_needed": "2-3", "desc": "Connect facts across 2-3 pages"},
-    "HARD":   {"count": 16, "pages_needed": "3+",  "desc": "Complex reasoning from 3+ sections"},
+    "EASY": {
+        "count":          17,
+        "pages_needed":   1,
+        "desc":           "단일 페이지 단순 사실 질문",
+        "max_new_tokens": 512,
+    },
+    "MIDDLE": {
+        "count":          18,
+        "pages_needed":   "2-3",
+        "desc":           "2-3페이지에 걸친 정보 연결 질문",
+        "max_new_tokens": 768,
+    },
+    "HARD": {
+        "count":          10,
+        "pages_needed":   "3+",
+        "desc":           "비교·대조·복합 추론 — 두 조건 이상 분석 필요",
+        "max_new_tokens": 1536,  # 추론 체인 고려
+    },
+    "NOT_ANSWERABLE": {
+        "count":          5,
+        "pages_needed":   "any",
+        "desc":           "환각 탐지용 — 문서에 없는 내용에 대한 그럴듯한 질문",
+        "max_new_tokens": 512,
+    },
 }
 
-LANG_MODEL_MAP = {'''
-    "ko": ["qwen2.5:32b", "exaone3.5:32b"],
-    "en": ["llama3.1:8b",  "qwen2.5:32b"],
-    "id": ["qwen2.5:32b",  "llama3.1:8b"],
-    "vi": ["qwen2.5:32b",  "llama3.1:8b"],
-    "uz": ["qwen2.5:32b",  "llama3.1:8b"]'''
+QA_PER_LANGUAGE = sum(cfg["count"] for cfg in DIFFICULTIES.values()) 
 
-    "ko": ["qwen2.5:7b"],
-    "en": ["qwen2.5:7b"],
-    "id": ["qwen2.5:7b"],
-    "vi": ["qwen2.5:7b"],
-    "uz": ["qwen2.5:7b"],
-}
-
-QA_PER_LANGUAGE = 50
-
-SYSTEM_PROMPT = """System Role: You are a multilingual assessment data generator specialized in university administration and campus life.
-Design scenarios where students from South Korea, USA, Indonesia, Vietnam, and Uzbekistan inquire about
-university systems (course registration, scholarships, visas, dormitories).
-
-Constraints:
-1. Contextual Reality: Use realistic situations based on university academic handbooks or official notices.
-2. Multi-turn Logic: Formulate the question as if it is part of an ongoing conversation. Use pronouns or references
-   that require understanding the provided [Context]. (e.g., Where should I submit those documents?)
-3. Language Consistency: Ensure the question and answer are naturally phrased in the target language,
-   respecting cultural nuances (e.g., honorifics in Korean).
-4. Strict Format: Output ONLY a single valid JSON object. Do not include any conversational filler,
-   introductory text, or markdown code blocks."""
+_llm = None
 
 
-USER_PROMPT_TEMPLATE = """[Context]
-{context}
-
-[Instruction]
-First, create a realistic student persona from one of these countries: Vietnam, Uzbekistan, Indonesia, USA, or Korea.
-Then generate ONE unique {difficulty} question and answer IN {language} that reflects that persona language level and situation.
-
-Persona guidelines:
-- TOPIK 1~2: Simple words, short sentences, basic grammar only.
-- TOPIK 3~4: Some academic terms, minor errors allowed.
-- TOPIK 5~6 / Native: Full fluency, academic vocabulary.
-
-Difficulty:
-- EASY: Single fact from one page.
-- MIDDLE: Connects 2-3 pages.
-- HARD: Complex reasoning from 3+ sections.
-
-[Constraints]
-- Output language: 100% {language}
-- Avoid these already-used topics: {history}
-- Answer must be detailed and grounded in the context.
-
-[Output - JSON only]
-{{
-    "question": "...",
-    "answer": "...",
-    "ref_pages": [{ref_pages}],
-    "topic_key": "short_2-3_word_keyword_in_english",
-    "persona": {{
-        "country": "...",
-        "topik_level": "...",
-        "situation": "..."
-    }}
-}}"""
-
-VALIDATE_PROMPT = """Check if this QA pair is accurate and answerable from the context.
-Question: {question}
-Answer: {answer}
-Context: {context}
-
-Respond ONLY in JSON: {{"is_valid": true or false, "reason": "brief reason"}}"""
-
-
-#  번역 모듈 (Facebook NLLB)
-_translator_cache = {}
-
-def get_translator(src_lang, tgt_lang):
-    key = f"{src_lang}-{tgt_lang}"
-    if key not in _translator_cache:
-        print(f"  NLLB 번역 모델 로드 중: {src_lang} -> {tgt_lang}")
-        _translator_cache[key] = pipeline(
-            "translation",
-            model="facebook/nllb-200-distilled-600M",
-            src_lang=src_lang,
-            tgt_lang=tgt_lang,
-            max_length=512,
-            device=-1,
+def load_model() -> LLM:
+    global _llm
+    if _llm is None:
+        print(f"모델 로드 중: {MODEL_PATH}")
+        _llm = LLM(
+            model=MODEL_PATH,
+            tensor_parallel_size=2,
+            dtype="auto",
+            trust_remote_code=True,
+            additional_config={"gdn_prefill_backend": "triton"},
         )
-    return _translator_cache[key]
+        print("모델 로드 완료!")
+    return _llm
 
-def translate_text(text, src_lang_code, tgt_lang_code):
+
+def call_model(
+    system_prompt: str,
+    user_prompt: str,
+    temperature: float = 0.8,
+    max_new_tokens: int = 1024,
+) -> dict | None:
+    llm = load_model()
+
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user",   "content": user_prompt},
+    ]
+    tokenizer = llm.get_tokenizer()
+    text      = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=False,
+    )
+
+    sampling_params = SamplingParams(
+        temperature=temperature,
+        max_tokens=max_new_tokens,
+    )
+    outputs = llm.generate([text], sampling_params)
+    raw     = outputs[0].outputs[0].text
+
     try:
-        translator = get_translator(src_lang_code, tgt_lang_code)
-        result = translator(text, max_length=512)
-        return result[0]["translation_text"]
-    except Exception as e:
-        print(f"  번역 실패: {e}")
-        return text
+        start = raw.find("{")
+        end   = raw.rfind("}") + 1
+        if start >= 0 and end > start:
+            return json.loads(raw[start:end])
+    except json.JSONDecodeError:
+        pass
+
+    print(f"  JSON 파싱 실패: {raw[:120]}")
+    return None
 
 
-#  컨텍스트 선택
-def select_context_pages(pages, difficulty):
+from prompts import (
+    SYSTEM_PROMPT,
+    USER_PROMPT_TEMPLATE,
+    HARD_PROMPT_TEMPLATE,
+    NOT_ANSWERABLE_PROMPT_TEMPLATE,
+    VALIDATE_PROMPT,
+    KO_TO_EN_TEMPLATE,
+    EN_TO_LANG_TEMPLATE,
+)
+# 참고 문서, 페이지
+def select_context_pages(pages: list, difficulty: str) -> tuple[str, list]:
     def ref(p):
         return {"source": p.get("source", "unknown"), "page": p["page"]}
 
@@ -141,107 +149,119 @@ def select_context_pages(pages, difficulty):
         page = random.choice(pages)
         return page["content"], [ref(page)]
     elif difficulty == "MIDDLE":
-        n = random.randint(2, 3)
+        n        = random.randint(2, 3)
         selected = random.sample(pages, min(n, len(pages)))
         selected.sort(key=lambda x: x["page"])
-        context = "\n\n".join(f"[Page {p['page']}]\n{p['content']}" for p in selected)
+        context  = "\n\n".join(f"[Page {p['page']}]\n{p['content']}" for p in selected)
         return context, [ref(p) for p in selected]
-    else:  # HARD
-        n = random.randint(3, min(5, len(pages)))
+    else:  # HARD, NOT_ANSWERABLE
+        n        = random.randint(3, min(5, len(pages)))
         selected = random.sample(pages, n)
         selected.sort(key=lambda x: x["page"])
-        context = "\n\n".join(f"[Page {p['page']}]\n{p['content']}" for p in selected)
+        context  = "\n\n".join(f"[Page {p['page']}]\n{p['content']}" for p in selected)
         return context, [ref(p) for p in selected]
-
-
-#  Ollama 호출
-def call_ollama(model, system, user, temperature=0.8):
-    payload = {
-        "model":   model,
-        "system":  system,
-        "prompt":  user,
-        "format":  "json",
-        "stream":  False,
-        "options": {"temperature": temperature, "num_predict": 1024},
-    }
-    try:
-        resp = requests.post(OLLAMA_URL, json=payload, timeout=120)
-        resp.raise_for_status()
-        raw = resp.json().get("response", "")
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        print("  JSON 파싱 실패")
-        return None
-    except requests.exceptions.ConnectionError:
-        print("  Ollama 연결 실패. 'ollama serve' 실행 여부 확인하세요.")
-        return None
-    except Exception as e:
-        print(f"  Ollama 오류: {e}")
-        return None
 
 
 #  QA 생성
-def generate_single_qa(lang_code, difficulty, context, ref_pages, history, model):
+def build_user_prompt(
+    lang_code: str,
+    difficulty: str,
+    context: str,
+    ref_pages: list,
+    history: list,
+) -> str:
     lang_name   = LANGUAGES[lang_code]["name"]
     history_str = ", ".join(history[-10:]) if history else "none"
-    ref_str     = ", ".join(str(p) for p in ref_pages)
 
-    user_prompt = USER_PROMPT_TEMPLATE.format(
-        context    = context[:3000],
-        difficulty = difficulty,
-        language   = lang_name,
-        history    = history_str,
-        ref_pages  = ref_str,
+    ref_str = ", ".join(
+        f"{p['source']} p.{p['page']}" for p in ref_pages
     )
 
-    result = call_ollama(model, SYSTEM_PROMPT, user_prompt)
+    if difficulty == "HARD":
+        return HARD_PROMPT_TEMPLATE.format(
+            context   = context[:3000],
+            language  = lang_name,
+            history   = history_str,
+            ref_pages = ref_str,
+        )
+    elif difficulty == "NOT_ANSWERABLE":
+        return NOT_ANSWERABLE_PROMPT_TEMPLATE.format(
+            context  = context[:3000],
+            language = lang_name,
+            history  = history_str,
+        )
+    else:
+        return USER_PROMPT_TEMPLATE.format(
+            context    = context[:3000],
+            difficulty = difficulty,
+            language   = lang_name,
+            history    = history_str,
+            ref_pages  = ref_str,
+        )
+
+
+def generate_single_qa(
+    lang_code: str,
+    difficulty: str,
+    context: str,
+    ref_pages: list,
+    history: list,
+) -> dict | None:
+    user_prompt     = build_user_prompt(lang_code, difficulty, context, ref_pages, history)
+    max_new_tokens  = DIFFICULTIES[difficulty]["max_new_tokens"]
+    result          = call_model(SYSTEM_PROMPT, user_prompt, max_new_tokens=max_new_tokens)
     if not result:
         return None
 
     if not all(k in result for k in ("question", "answer", "topic_key")):
-        print("  필수 필드 누락")
+        print("필수 필드 누락")
         return None
 
     if len(result["question"].strip()) < 10:
-        print("  질문이 너무 짧음")
+        print("질문이 너무 짧음")
         return None
 
-    # persona 필드 없으면 기본값
     if "persona" not in result or not isinstance(result["persona"], dict):
         result["persona"] = {"country": "unknown", "topik_level": "unknown", "situation": "unknown"}
 
+    if difficulty == "NOT_ANSWERABLE":
+        result["ref_pages"]         = []
+        result["is_not_answerable"] = True
+
     return result
 
+# 검증
+def validate_qa(qa_item: dict, context: str) -> dict:
+    if qa_item.get("is_not_answerable"):
+        return {"is_valid": True, "reason": "not_answerable — validation skipped"}
 
-#  검증
-def validate_qa(qa_item, context, validator_model):
     prompt = VALIDATE_PROMPT.format(
         question = qa_item["question"],
         answer   = qa_item["answer"],
         context  = context[:2000],
     )
-    result = call_ollama(validator_model, "You are a QA validator. Output only JSON.", prompt, temperature=0.0)
+    result = call_model("You are a QA validator. Output only JSON.", prompt, temperature=0.0)
     if result and "is_valid" in result:
         return result
     return {"is_valid": True, "reason": "validation skipped"}
 
 
-#  메인 생성 루프
-def print_progress_bar(current, total, width=30):
+#  진행률 바
+def print_progress_bar(current: int, total: int, width: int = 30) -> str:
     filled = int(width * current / total)
-    bar    = "X" * filled + "." * (width - filled)
-    pct    = current / total * 100
-    return f"[{bar}] {pct:.0f}% ({current}/{total})"
+    bar    = "█" * filled + "░" * (width - filled)
+    return f"[{bar}] {current/total*100:.0f}% ({current}/{total})"
 
-def generate_language_dataset(lang_code, pages, output_path):
+
+# 언어별 데이터셋 생성 (all 모드)
+
+def generate_language_dataset(lang_code: str, pages: list, output_path: str) -> list:
     lang_name = LANGUAGES[lang_code]["name"]
-    models    = LANG_MODEL_MAP[lang_code]
     results   = []
     history   = []
 
     print("\n" + "="*60)
     print(f"  언어: {lang_name} ({lang_code.upper()})  |  목표: {QA_PER_LANGUAGE}개")
-    print(f"  사용 모델: {' / '.join(models)}")
     print("="*60)
 
     for diff, cfg in DIFFICULTIES.items():
@@ -255,126 +275,356 @@ def generate_language_dataset(lang_code, pages, output_path):
 
         while success_count < target_count and attempt < max_attempts:
             attempt += 1
-            model = models[attempt % len(models)]
-
             context, ref_pages = select_context_pages(pages, diff)
-            print(f"  [{diff}] 시도 {attempt:>2} | 모델: {model:<20} | 참조 페이지: {ref_pages}")
+            ref_str = ", ".join(f"{p['source']} p.{p['page']}" for p in ref_pages)
+            print(f"  [{diff}] 시도 {attempt:>2} | 참조: {ref_str}")
 
             t0      = time.time()
-            qa      = generate_single_qa(lang_code, diff, context, ref_pages, history, model)
+            qa      = generate_single_qa(lang_code, diff, context, ref_pages, history)
             elapsed = time.time() - t0
 
             if qa is None:
                 print(f"           └─ 생성 실패 ({elapsed:.1f}s)")
                 continue
 
-            # 생성 모델 != 검증 모델 (모델이 1개면 동일 모델 사용)
-            validator  = models[(attempt + 1) % len(models)] if len(models) > 1 else model
-            validation = validate_qa(qa, context, validator)
-
+            validation = validate_qa(qa, context)
             if not validation["is_valid"]:
                 print(f"           └─ 검증 실패: {validation['reason']}")
                 continue
 
-            # 페르소나 요약 출력
-            persona     = qa.get("persona", {})
-            persona_str = f"{persona.get('country','?')} / {persona.get('topik_level','?')} / {persona.get('situation','?')[:30]}"
-
             topic_key = qa.get("topic_key", f"topic_{success_count}")
             history.append(topic_key)
+            persona   = qa.get("persona", {})
 
             qa_record = {
-                "id":           f"{lang_code}_{diff.lower()}_{success_count+1:03d}",
-                "language":     lang_code,
-                "lang_name":    lang_name,
-                "difficulty":   diff,
-                "question":     qa["question"],
-                "answer":       qa["answer"],
-                "ref_pages":    ref_pages,
-                "topic_key":    topic_key,
-                "persona":      persona,
-                "model":        model,
-                "validator":    validator,
-                "is_valid":     validation["is_valid"],
-                "valid_reason": validation["reason"],
-                "elapsed_sec":  round(elapsed, 2),
-                "created_at":   datetime.now().isoformat(),
+                "id":                f"{lang_code}_{diff.lower()}_{success_count+1:03d}",
+                "language":          lang_code,
+                "lang_name":         lang_name,
+                "difficulty":        diff,
+                "question":          qa["question"],
+                "answer":            qa["answer"],
+                "ref_pages":         qa.get("ref_pages", ref_pages),
+                "topic_key":         topic_key,
+                "is_not_answerable": qa.get("is_not_answerable", False),
+                "reasoning_type":    qa.get("reasoning_type"),
+                "persona":           persona,
+                "model":             MODEL_PATH,
+                "is_valid":          validation["is_valid"],
+                "valid_reason":      validation["reason"],
             }
             results.append(qa_record)
             success_count += 1
 
-            progress = print_progress_bar(success_count, target_count)
-            print(f"           └─ 성공 ({elapsed:.1f}s) | {progress}")
+            persona_str = (
+                f"{persona.get('country','?')} / "
+                f"{persona.get('topik_level','?')} / "
+                f"{persona.get('situation','?')[:30]}"
+            )
+            print(f"           └─ 성공 ({elapsed:.1f}s) | {print_progress_bar(success_count, target_count)}")
             print(f"              페르소나: {persona_str}")
-            print(f"              질문 미리보기: \"{qa['question'][:60]}...\"")
+            print(f"              질문:     \"{qa['question'][:60]}...\"")
 
             if success_count % 5 == 0:
-                _save_intermediate(results, output_path)
+                _save(results, output_path)
 
-        print(f"\n  {diff} 완료: {success_count}/{target_count}개 생성")
+        print(f"\n  {diff} 완료: {success_count}/{target_count}개")
 
-    _save_intermediate(results, output_path)
+    _save(results, output_path)
     print(f"\n  {lang_name} 완료! 총 {len(results)}개 | 저장: {output_path}")
     print("="*60)
     return results
 
 
-def _save_intermediate(results, output_path):
+#  Stage 1: 한국어 베이스 생성
+def stage_generate_korean(pages: list) -> None:
+    print("\n" + "="*60)
+    print("  [Stage ko] 한국어 베이스 QA 생성")
+    print("="*60)
+
+    Path("./output/qa_review").mkdir(parents=True, exist_ok=True)
+    output_path = "./output/qa_review/qa_ko_pending.json"
+    results     = generate_language_dataset("ko", pages, output_path)
+
+    print(f"\n  한국어 생성 완료: {len(results)}개")
+    print(f"  검수 파일: {output_path}")
+    print("  ─────────────────────────────────────────")
+    print("  [다음 단계 — 인간 검수]")
+    print('  각 항목에 "human_approved": true / false 표시 후:')
+    print("  python step2_generate_qa.py --stage en")
+    print("  ─────────────────────────────────────────")
+
+
+#  Stage 2: 한국어 → 영어 번역
+def stage_translate_to_english() -> None:
+    print("\n" + "="*60)
+    print("  [Stage en] 한국어 → 영어 번역")
+    print("="*60)
+
+    pending_path = "./output/qa_review/qa_ko_pending.json"
+    if not Path(pending_path).exists():
+        print(f"  오류: 검수 파일 없음 ({pending_path})")
+        print("  먼저 --stage ko 를 실행하세요.")
+        return
+
+    with open(pending_path, encoding="utf-8") as f:
+        ko_items = json.load(f)
+
+    # human_approved가 명시적으로 False인 항목만 제외
+    approved = [it for it in ko_items if it.get("human_approved") is not False]
+    rejected = len(ko_items) - len(approved)
+    print(f"  한국어 베이스: {len(ko_items)}개 (승인: {len(approved)}개, 제외: {rejected}개)")
+
+    Path("./output/qa_raw").mkdir(parents=True, exist_ok=True)
+
+    ko_raw_path = "./output/qa_raw/qa_ko_raw.json"
+    with open(ko_raw_path, "w", encoding="utf-8") as f:
+        json.dump(approved, f, ensure_ascii=False, indent=2)
+    print(f"  한국어 저장: {ko_raw_path}")
+
+    en_results  = []
+    country     = LANG_COUNTRY["en"]
+    output_path = "./output/qa_raw/qa_en_raw.json"
+
+    print(f"\n  영어 번역 시작... (총 {len(approved)}개)\n")
+
+    for i, ko_item in enumerate(approved):
+        user_prompt = KO_TO_EN_TEMPLATE.format(
+            ko_question = ko_item["question"],
+            ko_answer   = ko_item["answer"],
+            country     = country,
+            topic_key   = ko_item["topic_key"],
+        )
+
+        t0      = time.time()
+        result  = call_model(SYSTEM_PROMPT, user_prompt)
+        elapsed = time.time() - t0
+
+        ref_str = ", ".join(
+            f"{p['source']} p.{p['page']}" for p in ko_item.get("ref_pages", [])
+        )
+
+        if not result or "question" not in result:
+            print(f"  [{i+1:>3}] {ko_item['id']} → 번역 실패 ({elapsed:.1f}s), 원본 유지")
+            result = {
+                "question":  ko_item["question"],
+                "answer":    ko_item["answer"],
+                "topic_key": ko_item["topic_key"],
+                "persona":   {"country": country, "topik_level": "Native", "situation": "unknown"},
+            }
+        else:
+            print(f"  [{i+1:>3}] {ko_item['id']} → 완료 ({elapsed:.1f}s) | 참조: {ref_str}")
+            print(f"        질문: \"{result['question'][:60]}...\"")
+
+        en_record = {
+            "id":                f"en_{ko_item['difficulty'].lower()}_{i+1:03d}",
+            "language":          "en",
+            "lang_name":         "English",
+            "difficulty":        ko_item["difficulty"],
+            "question":          result["question"],
+            "answer":            result["answer"],
+            "ref_pages":         ko_item["ref_pages"],
+            "topic_key":         result.get("topic_key", ko_item["topic_key"]),
+            "is_not_answerable": ko_item.get("is_not_answerable", False),
+            "reasoning_type":    ko_item.get("reasoning_type"),
+            "persona":           result.get("persona", {}),
+            "model":             MODEL_PATH,
+            "source_ko_id":      ko_item["id"],
+            "is_valid":          True,
+            "valid_reason":      "translated from Korean",
+        }
+        en_results.append(en_record)
+
+        if (i + 1) % 5 == 0:
+            _save(en_results, output_path)
+
+    _save(en_results, output_path)
+    print(f"\n  영어 번역 완료: {len(en_results)}개 | 저장: {output_path}")
+    print("  ─────────────────────────────────────────")
+    print("  [다음 단계]")
+    print("  python step2_generate_qa.py --stage multilingual")
+    print("  ─────────────────────────────────────────")
+
+
+#  Stage 3: 영어 → ID / VI / UZ 번역
+def stage_expand_multilingual() -> None:
+    print("\n" + "="*60)
+    print("  [Stage multilingual] 영어 → ID / VI / UZ 번역")
+    print("="*60)
+
+    en_path = "./output/qa_raw/qa_en_raw.json"
+    if not Path(en_path).exists():
+        print(f"  오류: 영어 파일 없음 ({en_path})")
+        print("  먼저 --stage en 을 실행하세요.")
+        return
+
+    with open(en_path, encoding="utf-8") as f:
+        en_items = json.load(f)
+
+    print(f"  영어 베이스: {len(en_items)}개\n")
+
+    Path("./output/qa_raw").mkdir(parents=True, exist_ok=True)
+    all_results = {}
+
+    for lang_code in ["id", "vi", "uz"]:
+        lang_name   = LANGUAGES[lang_code]["name"]
+        country     = LANG_COUNTRY[lang_code]
+        output_path = f"./output/qa_raw/qa_{lang_code}_raw.json"
+        results     = []
+
+        print(f"\n  [{lang_name}] 번역 시작... (총 {len(en_items)}개)")
+
+        for i, en_item in enumerate(en_items):
+            user_prompt = EN_TO_LANG_TEMPLATE.format(
+                en_question = en_item["question"],
+                en_answer   = en_item["answer"],
+                language    = lang_name,
+                country     = country,
+                topic_key   = en_item["topic_key"],
+            )
+
+            t0      = time.time()
+            result  = call_model(SYSTEM_PROMPT, user_prompt)
+            elapsed = time.time() - t0
+
+            if not result or "question" not in result:
+                print(f"  [{lang_code}] {en_item['id']} → 번역 실패 ({elapsed:.1f}s), 영어 원본 유지")
+                result = {
+                    "question":  en_item["question"],
+                    "answer":    en_item["answer"],
+                    "topic_key": en_item["topic_key"],
+                }
+            else:
+                ref_str = ", ".join(
+                    f"{p['source']} p.{p['page']}" for p in en_item.get("ref_pages", [])
+                )
+                print(f"  [{i+1:>3}] {en_item['id']} → 완료 ({elapsed:.1f}s) | 참조: {ref_str}")
+                print(f"        질문: \"{result['question'][:60]}...\"")
+
+            qa_record = {
+                "id":                f"{lang_code}_{en_item['difficulty'].lower()}_{i+1:03d}",
+                "language":          lang_code,
+                "lang_name":         lang_name,
+                "difficulty":        en_item["difficulty"],
+                "question":          result["question"],
+                "answer":            result["answer"],
+                "ref_pages":         en_item["ref_pages"],
+                "topic_key":         result.get("topic_key", en_item["topic_key"]),
+                "is_not_answerable": en_item.get("is_not_answerable", False),
+                "reasoning_type":    en_item.get("reasoning_type"),
+                "persona":           {"country": country, "topik_level": "unknown", "situation": "unknown"},
+                "model":             MODEL_PATH,
+                "source_en_id":      en_item["id"],
+                "source_ko_id":      en_item.get("source_ko_id"),
+                "is_valid":          True,
+                "valid_reason":      "translated from English",
+            }
+            results.append(qa_record)
+
+            if (i + 1) % 5 == 0:
+                _save(results, output_path)
+
+        _save(results, output_path)
+        all_results[lang_code] = results
+        print(f"  {lang_name} 완료: {len(results)}개")
+
+    # 전체 통합 저장
+    ko_raw  = json.load(open("./output/qa_raw/qa_ko_raw.json", encoding="utf-8"))
+    en_raw  = json.load(open("./output/qa_raw/qa_en_raw.json", encoding="utf-8"))
+    flat    = ko_raw + en_raw + [item for items in all_results.values() for item in items]
+
+    combined_path = "./output/qa_raw/qa_dataset_raw.json"
+    with open(combined_path, "w", encoding="utf-8") as f:
+        json.dump(flat, f, ensure_ascii=False, indent=2)
+
+    print(f"\n  통합 저장: {combined_path} ({len(flat)}개)")
+    print("  ─────────────────────────────────────────")
+    print("  [다음 단계]")
+    print("  python step3_postprocess.py")
+    print("  ─────────────────────────────────────────")
+
+
+#  공통 저장
+def _save(results: list, output_path: str) -> None:
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"\n  중간 저장: {output_path} ({len(results)}개)")
 
 
-#  실행 진입점
 def main():
+    parser = argparse.ArgumentParser(
+        description="다국어 QA 데이터 생성 파이프라인",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.add_argument(
+        "--stage",
+        choices=["ko", "en", "multilingual", "all"],
+        default="all",
+        help=(
+            "ko          : 한국어 QA 생성 → 검수 파일 저장\n"
+            "en          : 검수된 한국어 → 영어 번역\n"
+            "multilingual: 영어 → ID / VI / UZ 번역\n"
+            "all         : 전체 언어 직접 생성 (검수 단계 없음)"
+        ),
+    )
+    args = parser.parse_args()
+
     print("\n" + "="*60)
     print("  Step 2: 다국어 QA 합성 데이터 생성 파이프라인")
     print("="*60)
-    print(f"  대상 언어: {', '.join(LANGUAGES.keys())}")
-    print(f"  언어당 QA: {QA_PER_LANGUAGE}개")
-    print(f"  총 목표:   {QA_PER_LANGUAGE * len(LANGUAGES)}개  ({len(LANGUAGES)}개 언어 x {QA_PER_LANGUAGE}개)")
-    print(f"  시작 시각: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"  모드  : --stage {args.stage}")
+    print(f"  모델  : {MODEL_PATH}")
+    print(f"  시작  : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("="*60)
 
     context_path = "./output/context/refined_context.json"
-    try:
-        with open(context_path, "r", encoding="utf-8") as f:
-            pages = json.load(f)
-        print(f"\n  컨텍스트 로드 완료: {len(pages)} 페이지")
-    except FileNotFoundError:
-        print(f"  '{context_path}' 없음. step1_preprocess_pdf.py 먼저 실행하세요.")
-        return
 
-    from pathlib import Path
-    Path("./output/qa_raw").mkdir(parents=True, exist_ok=True)
+    if args.stage in ("ko", "all"):
+        try:
+            with open(context_path, encoding="utf-8") as f:
+                pages = json.load(f)
+            print(f"\n  컨텍스트 로드: {len(pages)} 페이지")
+        except FileNotFoundError:
+            print(f"  오류: '{context_path}' 없음. step1 먼저 실행하세요.")
+            return
 
-    all_results     = {}
-    total_generated = 0
+    if args.stage == "ko":
+        stage_generate_korean(pages)
 
-    for lang_code in LANGUAGES.keys():
-        output_path  = f"./output/qa_raw/qa_{lang_code}_raw.json"
-        lang_results = generate_language_dataset(lang_code, pages, output_path)
-        all_results[lang_code]  = lang_results
-        total_generated        += len(lang_results)
+    elif args.stage == "en":
+        stage_translate_to_english()
 
-    combined_output = "./output/qa_raw/qa_dataset_raw.json"
-    flat_results    = [item for items in all_results.values() for item in items]
-    with open(combined_output, "w", encoding="utf-8") as f:
-        json.dump(flat_results, f, ensure_ascii=False, indent=2)
+    elif args.stage == "multilingual":
+        stage_expand_multilingual()
 
-    print("\n" + "="*60)
-    print("  전체 생성 완료!")
-    print("="*60)
-    for lang_code, items in all_results.items():
-        diff_counts = {}
-        for item in items:
-            diff_counts[item["difficulty"]] = diff_counts.get(item["difficulty"], 0) + 1
-        counts_str = " | ".join(f"{d}:{c}" for d, c in diff_counts.items())
-        print(f"     {lang_code.upper()}: {len(items)}개  ({counts_str})")
-    print(f"\n  총 생성: {total_generated}개")
-    print(f"  통합 저장: {combined_output}")
-    print(f"  완료 시각: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("="*60 + "\n")
+    elif args.stage == "all":
+        Path("./output/qa_raw").mkdir(parents=True, exist_ok=True)
+        all_results     = {}
+        total_generated = 0
+
+        for lang_code in LANGUAGES.keys():
+            output_path  = f"./output/qa_raw/qa_{lang_code}_raw.json"
+            lang_results = generate_language_dataset(lang_code, pages, output_path)
+            all_results[lang_code]  = lang_results
+            total_generated        += len(lang_results)
+
+        flat          = [item for items in all_results.values() for item in items]
+        combined_path = "./output/qa_raw/qa_dataset_raw.json"
+        with open(combined_path, "w", encoding="utf-8") as f:
+            json.dump(flat, f, ensure_ascii=False, indent=2)
+
+        print("\n" + "="*60)
+        print("  전체 생성 완료!")
+        print("="*60)
+        for lang_code, items in all_results.items():
+            diff_counts = {}
+            for item in items:
+                diff_counts[item["difficulty"]] = diff_counts.get(item["difficulty"], 0) + 1
+            counts_str = " | ".join(f"{d}:{c}" for d, c in diff_counts.items())
+            print(f"     {lang_code.upper()}: {len(items)}개  ({counts_str})")
+        print(f"\n  총 생성: {total_generated}개")
+        print(f"  저장  : {combined_path}")
+        print(f"  완료  : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print("="*60 + "\n")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1132 @@
+[
+  {
+    "id": "ko_easy_001",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저 외국인학생인데 대학에서 전동킥보드 타고 다니려고요. 헬멧을 안 쓰면 벌금이 얼마나 나오나요? 13세 미만은 타면 안 된다고 들었는데 저도 조심해야 할까요?",
+    "answer": "개인형 이동장치를 이용할 때 안전모를 착용하지 않으면 범칙금 2만 원이 부과됩니다. 또한, 전동킥보드나 전동이륜평행차 등을 이용할 때는 무조건 안전모를 써야 합니다. 13세 미만 어린이는 이용이 금지되어 있으며, 보호자가 과태료 10만 원을 내야 합니다. 외국인 학생이시더라도 한국 도로교통법과 동일하게 적용되므로 반드시 안전모를 착용하시기 바랍니다.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.106"
+    ],
+    "topic_key": "safety_rules",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 2",
+      "situation": "A beginner Korean student from Vietnam who wants to use an electric scooter on campus and is concerned about fines for not wearing a helmet."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context regarding the 20,000 won fine for not wearing a helmet, the prohibition for children under 13, and the 100,000 won fine for guardians, while correctly inferring that foreign students are subject to the same traffic laws."
+  },
+  {
+    "id": "ko_easy_002",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 1 학년 외국인 유학생인데, 이번 학기에 수강 신청할 때 '원어강의'가 무슨 뜻인지 잘 모르겠어요. 이 수업은 영어로 진행되는 건가요? 그리고 이 수업을 어떻게 접속해서 들어야 하나요? 교수가 말씀하신 e-class 접속 방법만 보면 되는지 궁금해서요.",
+    "answer": "원어강의는 영어 등 외국어로 진행되는 교과목을 의미합니다. 2025 학년도 유학 로드맵에 따르면, 이러한 수업은 온라인으로 운영되므로 e-class 접속 방법을 참고하여 수업에 참여하면 됩니다. 따라서 교수님의 안내대로 e-class 에 접속하여 수업을 들으시면 됩니다.",
+    "ref_pages": [
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.51"
+    ],
+    "topic_key": "foreign_language_lecture",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "First-year international student confused about course terminology and access methods for foreign language lectures."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: '원어강의' is defined as courses conducted in foreign languages (e.g., English), and the context explicitly states to refer to the e-class access method for participation."
+  },
+  {
+    "id": "ko_easy_003",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 국제학생이고 지금 2학기 등록을 안 해서 자퇴될까 봐 걱정돼요. 만약 지금 자퇴할 수 있는데 학기 시작된 지 30일 지났어요. 이때 돌려받을 등록금 비율이 얼마예요? 자퇴하려면 어떤 서류를 준비해야 하나요?",
+    "answer": "학기 개시일 31일 이후 60일까지 자퇴하면 등록금의 3분의 2를 돌려받습니다. 자퇴하려면 student 포털 시스템의 자료실에서 자퇴신청서를 작성하고, 가족관계증명서와 부모님 통장 사본을 준비해서 학사지원팀에 제출해야 합니다. 대리인이 제출할 때는 위임장도 필요합니다. 또한 지도교수나 국제학생지원팀과 상담 후 제출하세요.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.70"
+    ],
+    "topic_key": "tuition_refund",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "2",
+      "situation": "An international student who missed registration for the current semester and is worried about expulsion, asking about tuition refund rates after 31 days from the semester start and required withdrawal documents."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the refund policy (2/3 for days 31-60) and the required documents and procedures (student portal form, family relation certificate, parent's bank statement, proxy power of attorney, and consultations) found in the provided context."
+  },
+  {
+    "id": "ko_easy_004",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 이번 학기에 TOPIK 4 급을 따서 장학금 신청을 하고 싶은데, 4 급을 받으면 정확히 얼마를 받을 수 있나요? 그리고 평점 평균이 2.5 자보다 낮으면 못 받는다고 들었는데 제 경우에도 적용되나요?",
+    "answer": "TOPIK 4 급을 취득한 자비 외국인 유학생의 경우 20 만 원의 장학금이 지급됩니다. 단, 지급 조건으로 직전 학기 평점 평균이 2.5 이상이어야 합니다. 만약 평점 평균이 2.5 이하라면 성적 장려금 제외 대상이 되므로 장학금을 받을 수 없습니다. 또한, 신규 입학자의 경우 직전 학기 평점 평균 2.5 기준이 적용되지 않으니 참고하시기 바랍니다.",
+    "ref_pages": [
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.24"
+    ],
+    "topic_key": "topik scholarship",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "4",
+      "situation": "First-semester international student who recently passed TOPIK Level 4 and wants to confirm the scholarship amount and GPA requirement."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: TOPIK 4 level recipients receive 200,000 KRW, the GPA requirement is 2.5 or higher (excluding those below 2.5), and new students are exempt from the GPA requirement."
+  },
+  {
+    "id": "ko_easy_005",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 베트남에서 온 유학생이고, 오늘 부산 출입국관리사무소에 방문해서 비자 관련 민원을 처리하려고 해요. 그런데 홈페이지에서 보니까 당일 방문은 예약이 안 된다고 하더라고요. 직접 가도 될까요? 아니면 무조건 하이코리아 사이트에서 미리 예약을 해야만 서비스를 받을 수 있나요? 방문 예약 방법이 헷갈려서 물어봐요.",
+    "answer": "방문 예약이 필수입니다. 부산 출입국·외국인청을 방문하여 체류 민원을 처리하려면 반드시 당일 방문 예약은 불가능하므로, 하이코리아(www.hikorea.go.kr) 홈페이지에서 미리 방문 예약을 하셔야 합니다. 예약 없이 직접 방문하시면 서비스 이용이 어려울 수 있으니, 꼭 온라인으로 예약 후 방문하시기 바랍니다.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.17"
+    ],
+    "topic_key": "visit_reservation",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 2",
+      "situation": "An international student trying to visit the immigration office for visa matters but confused about the no walk-in policy."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context explicitly states that a visit reservation is mandatory for handling residence matters at the Busan Immigration Office, that same-day reservations are not possible, and that reservations must be made via the HiKorea website, which directly supports the answer."
+  },
+  {
+    "id": "ko_easy_006",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저 중국에서 온 외국인 학생인데, 가족 호구부와 주민증 사본을 꼭 제출해야 하나요? 심사할 때 서류를 줄일 수 있다고 들었는데, 저는 어떤 경우만 해당되나요?",
+    "answer": "중국인 외국인 학생의 경우, 초청자의 자격과 피초청자의 신분을 확인하기 위해 가족 호구부와 주민증 사본을 제출해야 합니다. 다만, 출입국 관리사무소장은 심사 필요에 따라 서류의 일부를 감면할 수 있습니다. 예를 들어, 초청의 진정성이나 자격이 명확히 확인되는 경우 일부 서류를 생략할 수 있으니, 방문 전 관할 출입국 사무소에 문의해 보시는 것이 좋습니다. 또한, 사설학원 등 평생교육시설에서는 언어 강사로 근무할 수 없으니 이 점도 참고하시기 바랍니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.25"
+    ],
+    "topic_key": "visa_documents",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "China",
+      "topik_level": "3~4",
+      "situation": "International student from China asking about required documents for visa application and possible exemptions during the review process."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: it confirms that household registration and resident ID copies are required for Chinese students, notes that the immigration office can reduce documents based on verification needs, and correctly states that foreign language instructors cannot work at private academies (lifelong education facilities)."
+  },
+  {
+    "id": "ko_easy_007",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 안구 감소 지역의 뿌리 산업 회사에서 일하고 있는 E-9 자격 외국인 근로자예요. 2024 년 11 월 27 일 시행된 새로운 규정에 따라, 제가 회사에서 일하면서 체류 자격을 E-7-4 로 바꿀 수 있나요? 그리고 변경할 때 체류 기간이 얼마나 되는지, 신규 비자를 받을 수 있는지 궁금해요. 특히 기존에 E-7-4 가 아닌 다른 자격으로 일했던 사람들도 이 새 규칙을 적용받을 수 있는지 알려주세요.",
+    "answer": "안녕하세요. 2024 년 11 월 27 일부터 시행된 규정에 따르면, 안구 감소 지역의 뿌리 산업에 종사하는 외국인 근로자는 체류 자격을 E-7-4 로 변경할 수 있습니다. 단, 신규 비자 발급 대상이 아니므로 기존에 한국에 체류 중인 상태에서 자격 변경만 가능합니다. 체류 기간은 고용 계약 범위 내에서 최장 2 년 이내로 1 회 부여됩니다. 수수료는 일반적인 자격 변경 수수료를 적용하며, 전자민원 감면 혜택도 받을 수 있습니다. 또한, 2023 년 9 월 25 일 시행일 이전에 자격 변경을 신청했던 자나, 그 이후에 E-7-4 자격을 취득한 자도 개정된 체류 관리 지침을 적용받으므로 자격 변경과 체류 기간 연장이 가능합니다. 따라서 질문하신 E-9 자격 근로자도 조건에 맞다면 자격 변경이 가능합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.122"
+    ],
+    "topic_key": "E-7-4 status change",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 3",
+      "situation": "Works in a root industry in a depopulated area on E-9 visa and wants to know if they can switch to E-7-4 under new 2024 rules."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context regarding the E-7-4 status change for foreign workers in root industries in declining population areas, including the implementation date (Nov 27, 2024), the restriction to status changes only (no new visas), the 2-year stay limit, and the applicability of the new guidelines to previous applicants and current E-7-4 holders."
+  },
+  {
+    "id": "ko_easy_008",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 D-2 비자 가지고 있는 유학생인데, 외국인 등록을 하고 난 후에 국민건강보험에 자동으로 가입된다고 들었어요. 그런데 학교에서 국민건강보험과 관련된 질문을 하면 답을 못 해준다고 해서요. 만약에 제가 국민건강보험 가입 사실을 확인하고 싶으면 학교에 전화하면 안 되고, 국민건강보험공단으로 직접 전화해야 하나요? 그리고 그 공단 전화번호가 정확히 어떻게 되나요?",
+    "answer": "네, 맞습니다. 개인정보보호법 때문에 학교에서는 국민건강보험 관련 상담이 불가능합니다. 따라서 국민건강보험 가입 사실을 확인하시려면 무조건 국민건강보험공단으로 직접 문의하셔야 합니다. 공단 전화번호는 033-811-2000 입니다. 전화하면 영어, 한국어, 중국어, 베트남어, 우즈베크어로 상담이 가능합니다. 등록 후 자동 가입되므로, 가입 사실이 필요하다면 이 번호로 확인하시기 바랍니다.",
+    "ref_pages": [
+      "외국인 유학생 국민건강보험 Health Insurance info. (KOR. ENG.) 수정완료.pdf p.1"
+    ],
+    "topic_key": "health_insurance_contact",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Uzbekistan",
+      "topik_level": "3-4",
+      "situation": "A student from Uzbekistan who recently completed their foreigner registration and needs to verify their health insurance status but is confused about the school's policy regarding inquiries."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: it confirms that schools cannot provide health insurance counseling due to the Personal Information Protection Act, directs the user to contact the National Health Insurance Corporation (NHIS) directly, and provides the correct phone number (033-811-2000) and supported languages listed in the text."
+  },
+  {
+    "id": "ko_easy_009",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 한국에 5 년 이상 일한 경력 있는 외국인 학생입니다. 기계공학 전공자를 위해 고용추천서 발급 조건에서 학위 요건이 어떻게 적용되나요? 5 년 경력이면 학사학위가 꼭 필요한가요?",
+    "answer": "일반적으로는 고용추천서 발급 제도가 폐지되었습니다. 하지만 국내 E-9 자격으로 5 년 이상 경력이 있는 분은 예외적으로 신청이 가능합니다. 이 경우, 반드시 학사학위 이상을 소지해야 합니다. 따라서 5 년 이상의 경력이 있더라도 학사학위가 없으면 고용추천서 발급이 불가능합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.145"
+    ],
+    "topic_key": "employment_recommendation",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "Mechanical Engineering student with 5 years of local work experience checking degree requirements for employment recommendation."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context explicitly states that while the employment recommendation system is generally abolished, exceptions exist for those with 5+ years of experience on an E-9 visa, requiring a bachelor's degree or higher. The answer accurately reflects this condition."
+  },
+  {
+    "id": "ko_easy_010",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "안녕하세요? 저는 새로 입학한 외국인 유학생이고, K문화교육전공을 선택해서 공부하고 싶어요. 교수님이 말씀하시길 졸업하려면 전공 과목을 많이 들어야 된다고 하더라고요. K문화교육전공에서 졸업하기 위해 꼭 채워야 하는 총 이수 학점이 몇 학점인지 정확히 알고 싶습니다. Global Studies 전공처럼 72 학점이 필요한가요, 아니면 다른 숫자인가요?",
+    "answer": "안녕하세요. K문화교육전공을 선택하신 유학생 분께 답변드립니다. K문화교육전공의 졸업 이수 학점은 총 42 학점입니다. 이는 2024 학년도와 동일하게 유지되고 있습니다. Global Studies 전공이 영역별로 15 학점 이상 이수해야 하고 총 72 학점이 필요한 것과 다릅니다. K문화교육전공은 한국어와 한국문화, 국제학, 통번역 전략 기술 등을 배우는 과정이며, 전체적으로 42 학점을 이수하면 졸업 조건을 충족할 수 있습니다. 궁금한 점이 있으면 국제대학 홈페이지를 참고해 주세요.",
+    "ref_pages": [
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.36"
+    ],
+    "topic_key": "major_graduation_credits",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "First-year international student confused about the difference in credit requirements between the K-Culture Education major and the Global Studies major."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context, correctly stating that the K Culture Education major requires 42 credits while the Global Studies major requires 72 credits."
+  },
+  {
+    "id": "ko_easy_011",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저 지금 재학 중인 학생인데요. 등록금이 200만 원 넘어서 250만 원 미만이에요. 이렇게 되면 등록금을 여러 번 나눠서 낼 수 있나요? 몇 번까지 가능할지 알려주세요.",
+    "answer": "네, 가능합니다. 등록금 200만 원 이상 250만 원 미만의 경우 분할납부를 2회에서 4회까지 선택해서 신청할 수 있습니다. 학생포털시스템에서 등록 메뉴로 들어가서 분할납부 신청을 하시면 됩니다. 단, 1회차를 놓치면 신청이 automatically 취소되니 꼭 첫 날짜 안에 납부하세요.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.22"
+    ],
+    "topic_key": "installment_payment",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "Current student needing to pay tuition in installments due to high tuition amount."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "validation skipped"
+  },
+  {
+    "id": "ko_easy_012",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저 베트남 사람이고 인터넷뱅킹을 한국어 말고 모국어로 하고 싶어요. 베트남어를 지원하는 은행이 있나요? 아니면 다른 외국어도 가능한가요?",
+    "answer": "네, 일부 은행은 외국인을 위해 베트남어뿐만 아니라 영어, 중국어, 러시아어 등 다양한 모국어로 인터넷뱅킹 서비스를 제공하고 있습니다. 은행마다 지원 언어가 다를 수 있으니, p.172의 '참고 자료 4'를 확인하여 베트남어를 지원하는 은행을 찾아보시는 것이 좋습니다. 인터넷뱅킹 신청 시에는 신분증(외국인등록증 또는 여권)을 지참하여 은행을 방문해야 합니다.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.16"
+    ],
+    "topic_key": "foreign_language_banking",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "A Vietnamese international student wants to use internet banking in their native language instead of Korean."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context, which confirms that some banks support internet banking in Vietnamese, English, Chinese, and Russian, and directs the user to page 172 ('Reference Material 4') for specific details, while also correctly stating the requirement to visit the bank with identification."
+  },
+  {
+    "id": "ko_easy_013",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 한국에 온 지 얼마 안 된 외국인 학생이에요. 동생이 사고를 당해서 급히 집으로 돈을 보내야 하는데, 친구가 아는 브로커를 쓰라고 해요. 그런데 브로커를 통해 송금하는 게 불법이라고 들었어요. 정말 브로커는 안 되나요? 그럼 은행으로만 보내야 하나요?",
+    "answer": "네, 브로커를 통해서는 송금할 수 없습니다. 대화 내용에서도 알 수 있듯이 한국에서 브로커를 통한 송금은 불법입니다. 친구의 조언은 잘못되었습니다. 급하게 송금해야 한다면 반드시 정식 은행을 이용하셔야 합니다. 은행 수수료가 높을 수 있지만, 불법 브로커를 사용하면 큰 문제가 생길 수 있으니 꼭 은행을 이용해 주세요.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.84"
+    ],
+    "topic_key": "illegal_money_transfer",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "베트남",
+      "topik_level": "TOPIK 2",
+      "situation": "가족에게 급히 송금해야 하는 상황이며 불법 브로커 사용을 고민 중임"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context, which explicitly states that sending money through brokers in Korea is illegal and advises using a bank instead."
+  },
+  {
+    "id": "ko_easy_014",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저陌生人 전화로 돈 요구했는데, 어떤 기관이 이런 일을 하나요? 정부 기관이 전화로 돈 달라고 할 수 있나요? 제 통장도 다른 사람에게 빌려주면 안 된다고 들었는데, 정말인가요? 보이스피싱을 당했으면 어디에 신고해야 하나요?",
+    "answer": "안녕하세요. 검찰, 금융감독원 등 모든 정부 기관은 어떠한 경우에도 전화로 돈을 요구하지 않습니다. 만약 전화를 받으면 사기일 가능성이 높습니다. 또한, 자신의 은행 계좌나 통장, 카드를 타인에게 빌려주거나 주는 행위는 금지되어 있습니다. 이를 다른 사람이 보이스피싱에 악용하면 민사상 손해배상 책임을 질 수 있고, 범죄 조직에 가담한 것으로 처벌받을 수 있습니다. 만약 사기 피해를 입었다면 즉시 경찰(112) 또는 금융감독원(1332)에 신고하고, 거래를 정지해 달라고 금융기관에 요청해야 합니다.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.104"
+    ],
+    "topic_key": "fraud_prevention",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 1",
+      "situation": "A first-year international student who received a suspicious phone call asking for money and is confused about whether government agencies actually make such requests."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: government agencies do not request money via phone, lending bank accounts is prohibited and carries legal liability, and the correct reporting channels (112, 1332) and actions (transaction stop) are provided."
+  },
+  {
+    "id": "ko_easy_015",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저 D-2 비자로 유학 온 학생인데, 학력 증명서 제출할 때 한국에서만 공증받으면 되나요, 아니면 제가 사는 나라에서 공증 받고 한국 대사관 확인도 받아야 하나요?",
+    "answer": "D-2 유학생의 학력 증명서는 현행 유학 비자 지침에 따라 국가별 공증 절차대로 공적 확인을 받은 경우에만 인정됩니다. 단순히 한국에서만 공증받는 것이 아니라, 본국 공증 후 관할 한국 대사관이나 영사관의 확인 절차를 밟아야 Valid(유효)한 서류로 인정받습니다. 휴학증명서의 경우 휴학일로부터 1 년 이내라면 인정되지만, 학력증명서는 공증 절차가 반드시 필요합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.31"
+    ],
+    "topic_key": "academic_certification",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 3",
+      "situation": "D-2 visa holder preparing for scholarship renewal and needs to know specific notary requirements for academic documents."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context, which states that academic certificates are only recognized if they follow the notarization procedures per country as per the D-2 visa guidelines, and correctly distinguishes this from the specific rule for suspension certificates mentioned in the text."
+  },
+  {
+    "id": "ko_easy_016",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 한국에 200 일째 살고 있는 외국인 유학생인데요, 국민건강보험을 꼭 가입해야 하나요? 만약 본국에서 이미 똑같은 의료 보장을 받고 있다면 한국 보험을 안 들어도 되는지 알려주세요. 어디서 제외 신청을 할 수 있나요?",
+    "answer": "네, 한국에 6 개월 (180 일) 이상 거주하는 외국인 유학생은 지역가입자로 국민건강보험에 가입해야 합니다. 하지만 본국 법령이나 개인 보험으로 한국 국민건강보험과 겹치는 수준의 의료 보장을 받고 있다면, 중복 가입을 하지 않아도 됩니다. 이 경우 가장 가까운 국민건강보험공단 지사에 방문해서 '가입 제외' 신청을 하시면 됩니다. 신청 없이 보험료를 내지 않으면 병원 이용 시 모든 비용을 본인이 내야 하고, 비자 연장에도 문제가 생길 수 있으니 꼭 확인하시기 바랍니다.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.81"
+    ],
+    "topic_key": "health_insurance_exemption",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 3",
+      "situation": "International student residing in Korea for over 6 months, wondering if they can skip national insurance due to existing home country coverage."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: it confirms the 180-day residency requirement, the exemption for equivalent foreign coverage, the procedure to apply for exclusion at a local NHIS branch, and the consequences of non-payment (full cost liability and visa restrictions)."
+  },
+  {
+    "id": "ko_easy_017",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "EASY",
+    "question": "저는 석사 과정 학생인데, 논문 쓰기 전에 체류 기간을 늘려야 할 것 같아요. 그땐 준비해야 할 서류에 수료 증명서가 필수인가요? 그리고 비자 연장 신청할 수 있는 기간이 언제부터인지 정확히 알고 싶습니다. 체류 만료 4 달 전부터 가능한지, 아니면 더 일찍 신청해야 하는지 궁금해요. 특히 학점이나 출석률 때문에 직접 하이코리아로 가야 하는 경우가 있는지 궁금합니다.",
+    "answer": "석사 과정 학생으로서 체류 연장을 하려면 논문 작성 계획 확인서와 수료 증명서가 필요합니다. 수료 증명서는 필수 서류 중 하나입니다. 체류 기간 연장 신청 가능한 시기는 허가받은 체류 기간 만료 4 개월 전부터 만료 당일까지입니다. 일반적인 경우 학사 과정의 학점 부족이나 출석률 미달이 없다면 국제학생지원팀을 통한 단체 접수가 가능하지만, 만약 초과학기자이거나 평점이 2.0 미만인 경우 등 특수 상황에서는 하이코리아를 통해 직접 방문 신청해야 할 수 있습니다. 수수료는 6 만 원이며, 처리 기간은 통상 14 일 이내지만 신청이 많을 경우 지연될 수 있으니 미리 준비하시기 바랍니다.",
+    "ref_pages": [
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.12"
+    ],
+    "topic_key": "visa_extension_documents",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "베트남",
+      "topik_level": "4",
+      "situation": "석사 과정 학생으로 논문 작성 계획서와 수료 증명서를 준비 중이며 체류 기간 연장이 시급한 상황"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context regarding required documents (thesis plan confirmation and completion certificate for master's students), the application window (4 months before expiration), and the conditions for direct application at HiKorea (academic probation or exceeding study limits)."
+  },
+  {
+    "id": "ko_middle_001",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 지금 기숙사 생활 하고 있는데, 방 배정이 바뀌어서 주소가 변경되었어요. 이때 등록사항 변경 신고를 하려면 몇 일 안에 해야 하고, 해서 제출할 서류가 뭐가 필요한가요? 특히 기숙사 행정실에 가야 하는지 아니면 다른 곳에 가야 하는지 알려주세요.",
+    "answer": "기숙사 주소가 변경된 경우, 전입한 날로부터 15 일 이내에 체류지 변경 신고를 해야 하며, 초과할 경우 벌금이 부과됩니다. 기숙사에 거주하는 경우, 개인적으로 출입국관리사무소를 방문할 필요 없이 기숙사 행정실을 방문하여 신청하시면 됩니다. 준비해야 할 서류는 통합신청서, 여권, 외국인등록증, 그리고 체류지 입증 서류인 유효한 기숙사 계약서 및 거주숙소제공확인서입니다. 변경사항이 발생하면 반드시 15 일 이내에 처리해야 합니다.",
+    "ref_pages": [
+      "2025 년 유학 로드맵.pdf p.11",
+      "NHIS info.pdf p.7",
+      "학사제도 안내.pdf p.66"
+    ],
+    "topic_key": "address_change_report",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Uzbekistan",
+      "topik_level": "TOPIK 3",
+      "situation": "International student residing in the university dormitory who needs to report a room change."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context on Page 11, correctly stating the 15-day deadline, the requirement to visit the dormitory administration office for dorm residents, and the specific documents needed (Integrated Application Form, Passport, Alien Registration Card, and proof of residence like a dorm contract)."
+  },
+  {
+    "id": "ko_middle_002",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저 이번에 D-2 비자로 재학 중인 유학생인데, 방학 때 아르바이트를 해볼까 생각하고 있어요. 근데 우선 조건이 있는데 직전 학기 성적이 C학점(2.0) 이상이어야 하고, 한국어가 TOPIK 2급 이상이어야 한다는 거 알고 있어요. 저 성적이 2.5점으로 조건은 다 맞는데, 이제부터 신청서랑 다른 서류들 다 챙겨서 출입국사무소에 가면 바로 허가가 나는 거죠? 그리고 특히 사업자등록증 사본이나 표준근로계약서 같은 건 제가 미리 구해와야 하나요? 대학에서 도와주는 게 있는지 꼼꼼히 알고 싶어서요.",
+    "answer": "안녕하세요. D-2 비자 소지 유학생으로서 시간제 취업(아르바이트)을 원하신다면, 사전에 반드시 허가를 받아야 합니다. 문의하신 조건인 직전학기 평점 2.0 이상과 TOPIK 2급 이상은 필수 요건이므로, 해당 조건을 충족하고 계시면 신청 자격은 무방합니다. 다만, 허가 신청 시 반드시 제출해야 하는 서류는 다음과 같습니다: 1) 신청서, 2) 여권, 3) 외국인등록증, 4) 시간제취업확인서, 5) 성적증명서, 6) 한국어능력 증빙 서류, 7) 사업자등록증 사본, 8) 표준근로계약서 사본, 9) 취업확인서(대학 담당자 작성). 여기서 주의할 점은 '사업자등록증 사본'과 '표준근로계약서 사본'은 고용주(아르바이트를 시킬 사업장)로부터 먼저 받아와야 하는 서류이며, '취업확인서'는 반드시 학내 담당자가 작성해 주어야 합니다. 따라서 고용 계약이 성사된 후 해당 사업장의 서류와 대학 담당자의 확인서를 갖춘 상태에서 관할 출입국사무소를 방문하거나 하이코리아 홈페이지를 통해 온라인 신청을 진행하셔야 합니다. 허가 스티커가 부착되거나 온라인 허가서가 출력되어야 실제로 근무할 수 있으니, 서류 준비를 꼼꼼히 하시기 바랍니다.",
+    "ref_pages": [
+      "2025년 BUFS 유학생 유학 로드맵.pdf p.14"
+    ],
+    "topic_key": "part_time_work_permission",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "A D-2 visa student with a GPA of 2.5 and TOPIK 3 who wants to start working part-time during the semester and needs to know the exact document requirements and process."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context provided on Page 14 regarding D-2 visa part-time work requirements, including the GPA (2.0) and TOPIK (Level 2) conditions, the list of required documents, and the specific roles of the employer (providing business registration and contract) and the university (providing the employment confirmation letter)."
+  },
+  {
+    "id": "ko_middle_003",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 외국에서 한국으로 어학 연수 오려고 하는 학생인데요, 부모님 통장 잔고 증명을 준비해야 한다는데, 만약에 제 본국 은행에서 만든 서류를 가져갈 때 아포스티유나 대사관 확인이 꼭 필요한지 궁금해서요. 그리고 서류에 어떤 게 들어가야 하는지도 자세히 알고 싶습니다.",
+    "answer": "외국에서 발급된 은행 잔고 증명서 같은 문서는 본국에서 아포스티유 공증이나 주재 한국 대사관의 영사 확인을 받아야 합니다. 만약 국가나 기업에서 체재비를 지원받았다면 관련 서류로 증명할 수도 있습니다. 준비해야 할 서류 목록에는 사증 발급 인정 신청서, 여권 사본, 표준 규격 사진 1 장, 최종 학력 입증 서류 (공증), 입학 허가서, 그리고 재정 능력 입증 서류 (은행 잔고 증명 또는 부모 재정 능력 증명) 가 포함됩니다. 추가로 한국어 능력 증명 서류 (TOPIK 1 급 이상 또는 세종학당 초급 1 수료) 도 필요합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.23",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.102",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.107"
+    ],
+    "topic_key": "visa_financial_proof",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "베트남",
+      "topik_level": "TOPIK 2",
+      "situation": "어학연수 비자 신청을 위해 재정 증빙 서류를 준비 중인데, 해외 발급 서류의 공증 요건과 제출 서류 목록이 명확하지 않아 문의하는 상황"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the information provided in Page 23 of the context regarding the requirement for apostille or consular verification for overseas bank documents, the alternative proof of financial support from organizations, and the specific list of required documents for the visa application."
+  },
+  {
+    "id": "ko_middle_004",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 외국인 근로자인데 회사에서 저를 1년 넘게 고용해서 퇴직금을 보장하려고 출국만기보험을 들어주라고 하더라고요. 근데 보험회사가 삼성화재인 건 알겠는데, 회사에서 가입해야 하는 기간이 근로계약 시작일로부터 정확히 몇 일 이내인지 모르겠어요. 또 보험료는 월급의 몇 퍼센트인지도 궁금해서요. 회사 도산 때 받을 수 있는 보증보험은 또 다른 건가요?",
+    "answer": "외국인 근로자를 1년 이상 고용하는 경우, 회사는 근로계약 효력 발생일로부터 15일 이내에 출국만기보험이나 보증보험에 가입해야 합니다. 출국만기보험의 보험료는 통상 임금의 8.3%입니다. 또한, 사업장 도산이나 폐업으로 임금이 체불될 때를 대비한 보증보험은 서울보증보험을 통해 가입하며, 이 경우 최대 400만 원까지 보험금을 받을 수 있습니다.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.73",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.84"
+    ],
+    "topic_key": "departure_guarantee_insurance",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 4",
+      "situation": "A foreign worker in Korea hired for over a year, asking about the specific deadline and premium for the employer-mandated insurance."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: the 15-day enrollment deadline, the 8.3% premium rate for departure guarantee insurance, and the distinction regarding guarantee insurance for wage arrears (up to 4 million KRW) in case of business insolvency."
+  },
+  {
+    "id": "ko_middle_005",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 러시아에서 온 유학생이고, 한국 선박 회사에서 선원으로 일할 계획이라서 입국 비자를 신청하려고 합니다. 한국으로 가기 전에 저는 사증발급인정서가 필요한데, 제 신청 서류를 현지에 있는 여행사에서 대신 접수해도 되는지 궁금합니다. 만약 여행사를 통해 신청할 수 있다면, 제가 직접 제출해야 하는 서류 목록이 일반 신청자와 똑같은지 확인하고 싶어요. 특히 고용계약서와 고용추천서 같은 것이 필요한지 알고 싶습니다.",
+    "answer": "네, 본인 직접 신청이 어려울 경우 재외공관장이 지정한 국외 전담여행사를 통해 사증신청을 대행할 수 있습니다. 여행사를 통해 신청하더라도 제출해야 하는 서류는 개인이 직접 신청할 때와 동일합니다. 적용되는 서류 목록은 사증발급신청서, 여권, 표준규격 사진 1매, 학위증 및 자격증(면허증) 사본, 소관 중앙행정기관장(또는 경제자유구역의 경우 시장/도지사)의 고용추천서, 그리고 고용계약서입니다. 선원으로 근무하는 경우 선박운항 필수전문요원에 해당하므로 위 서류들을 모두 준비하여 여행사를 통해 제출하시면 됩니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.38",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.154"
+    ],
+    "topic_key": "visa_agent_application",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Russia",
+      "topik_level": "4",
+      "situation": "A Russian international student planning to work as a seaman on a Korean vessel and seeking to apply for a visa through an authorized travel agency before entering Korea."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context explicitly states that designated overseas travel agencies can handle visa applications on behalf of applicants and that the required documents (including employment contract and recommendation letter) are the same for both direct and agency applications. It also confirms that ship crew members (essential personnel) fall under the category requiring these specific documents."
+  },
+  {
+    "id": "ko_middle_006",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 지금 한국에 처음 와서 외국인등록도 아직 안 끝났고, D-2 비자도 발급받기 전이라서 국민건강보험에 가입할 수 없는 상태입니다. 입국 후 등록까지 1~3개월 정도 시간이 걸린다고 들었는데, 그 기간 동안에 혹시 사고가 나거나 병원에 가야 할 경우가 생기면 어떻게 해야 하나요? 해외에 있는 보험은 있지 않지만, 한국에서 최소 2개월 이상 단기 보험을 의무로 들어야 한다는 조건이 있어서, 지금 제가 알아서 www.sos911.co.kr 같은 사이트에서 개인적으로 가입해야 하는지, 아니면 학교에서 알아서 해결해주는지 궁금해서요. 학교 단체보험을 automatisch 들어주는지 아니면 제가 직접 신청해야 하는지 알려주시면 감사하겠습니다.",
+    "answer": "안녕하세요, 외국인등록을 마치기 전인 현재 D-2 비자 소지 예정 학생이시군요. 첫 입국 후 외국인등록 및 국민건강보험 자동가입까지 약 1~3개월의 공백 기간이 생기기 때문에, 이 기간 동안의 안전을 위해 반드시 사보험 (단기보험) 가입이 필수입니다. 국민건강보험은 외국인등록을 마친 후에만 자동 가입되므로, 그 전까지는 커버되지 않습니다. 학교에서 자동으로 단체보험을 가입해주지 않으며, 학생 본인이 직접 www.sos911.co.kr 사이트 등을 통해 신청해야 합니다. 특히 해외에서 보험이 없으신 경우 한국 내 단기보험 (최소 2개월 권장) 을 의무적으로 가입하셔야 하며, 이는 비자 발급 및 체류 유지와도 연관이 있을 수 있습니다. 직접 신청이 원칙이며, 가입 기간은 건강보험 가입 전까지의 기간을 커버할 수 있도록 최소 2개월 이상으로 설정하시는 것을 권장합니다.",
+    "ref_pages": [
+      "외국인 유학생 국민건강보험 Health Insurance info. (KOR. ENG.) 수정완료.pdf p.1",
+      "Visa_Regulations.pdf p.38",
+      "Visa_Regulations.pdf p.53"
+    ],
+    "topic_key": "private_insurance_registration",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "A newly arrived international student who has not yet completed foreign registration and is waiting for D-2 visa issuance, seeking clarification on mandatory short-term insurance requirements before National Health Insurance coverage begins."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: it confirms that National Health Insurance applies only after foreign registration, that a gap of 1-3 months exists requiring private insurance, that students without overseas insurance must purchase domestic short-term insurance, and that the student must apply directly via the specified website (www.sos911.co.kr) as the school does not automatically enroll them."
+  },
+  {
+    "id": "ko_middle_007",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 베트남에서 온 외국인 유학생이고, 국내 대학에서 항공기 부품 제조 관련 이공계 전공으로 석사 학위를 마쳤어요. 이제 취업이 결정되었는데, 졸업 후 경력이 1년도 안 되어서 경력 조건을 채울 수 없을 것 같아요. 이런 경우에도 경력 요건을 면제받고 비자를 받을 수 있는지, 그리고 어떤 서류를 제출해야 하는지 정확히 알고 싶어서요.",
+    "answer": "국내 대학에서 이공계 전문학사 이상의 학위를 가진 외국인 유학생이 항공기 부품 제조업체에 취업이 확정되어 산업통상자원부 장관의 고용추천서를 받은 경우, 경력 요건을 면제받을 수 있습니다. 따라서 석사 학위 소지자이고 취업이 확정되었다면 경력 시간이 부족해도 조건을 충족할 수 있습니다. 제출해야 할 서류는 학위증과 경력 증명서이며, 해외 발급 서류인 경우 아포스티유 확인이나 대한민국 공관의 영사 확인이 필수로 필요합니다. 또한, 고용주는 연평균 매출액 10억 원 이상, 상시 근로자 10인 이상 및 최근 2년 이내 법 위반 이력이 없는 업체여야 합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.31",
+      "Visa_Regulations.pdf p.110"
+    ],
+    "topic_key": "foreign_employment_exemption",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 5",
+      "situation": "International master's graduate in aerospace engineering seeking employment in a domestic aviation parts manufacturing company without sufficient post-graduation work experience."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: it correctly identifies the exemption for master's graduates in engineering from domestic universities working in aircraft parts manufacturing with a recommendation from the Minister of Trade, Industry and Energy, and lists the required documents (degree certificate, work experience certificate with apostille/consular authentication) and employer criteria (revenue, employee count, no violations) as stated in Page 110."
+  },
+  {
+    "id": "ko_middle_008",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 D-4-6 연수 비자로 한국에 온 외국인 유학생인데, 스마트폰을 새로 바꿨어요. 아까 모바일 뱅킹 알림을 보니까 공동인증서가 사라져서 돈 이체도 안 된다고 하더라고요. 지금 인터넷뱅킹 할 때 쓰는 금융인증서를 쓰고 있는데, 새 폰에서 다시 발급받지 않고 바로 쓸 수 있는 방법이 있을까요? 혹시 복사해야 하는지, 아니면 그냥 클라우드에서 자동으로 나오는 건지 알려주세요.",
+    "answer": "안녕하세요. 스마트폰을 교체하셨을 때 공동인증서가 삭제되어 금융 서비스를 못 쓰시는 분들은 많으십니다. 먼저 확인하셔야 할 점은 현재 사용 중인 인증서 종류입니다. 질문자님께서 말씀하신 대로 인터넷뱅킹에서 '금융인증서'를 사용 중이시라면, 별도의 복사나 백업 절차 없이 클라우드에 저장된 인증서를 새 스마트폰에서도 그대로 사용할 수 있습니다. 앱을 실행하고 인증서를 요청하면 자동으로 인식이 됩니다. 다만, 만약 '공동인증서'를 사용 중이셨다면, 새로 폰을 바꿔서 바로 쓸 수는 없고 기존 폰에서 미리 백업(복사)을 해두거나, 아니면 은행 홈페이지를 통해 새로 재발급을 받아야 합니다. 지금 사용하고 계신 금융인증서라면 새로 설치할 필요 없이 새 폰에 앱을 깔고 바로 사용하시면 됩니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.21",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.27",
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.36"
+    ],
+    "topic_key": "mobile_banking_certificate",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 4",
+      "situation": "An international student who recently replaced their smartphone and is worried about being unable to use mobile banking due to certificate issues."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context on Page 27 explicitly states that if a user is using a 'financial certificate' (금융인증서) for internet banking, they can use it on a new smartphone without a copy procedure because it is stored in the cloud, which directly answers the user's question."
+  },
+  {
+    "id": "ko_middle_009",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 한국에 있는 도축장에서 일하고 싶은 이슬람 유학생입니다. 고용추천서를 받기 위해 필요한 조건을 알려고 하는데, 저처럼 무슬림 도축 인력으로 일하려면 업체에서 반드시 갖춰야 하는 조건이 있나요? 예를 들어 도축장 시설이나 다른 무슬림 인력 수 같은 거요. 특히 관련 자격증 소지자가 아니라 일반 고등학교 졸업자일 때 경력 조건이 어떻게 되는지 자세히 알려주시면 좋겠습니다.",
+    "answer": "이슬람 율법에 따른 도축 업무 종사를 원할 때, 고용추천서 발급을 위해 업체는 반드시 다음 두 가지 조건을 갖춰야 합니다. 첫째, 해당 업체는 한국이슬람교중앙연합회(KKMF)나 해외 주요 인증기관에서 도축장 인증을 받은 곳이어야 하거나, 전용 도축 라인을 설치한 곳이어야 합니다. 둘째, 해당 업체에는 최소 3 명의 무슬림 도축 인력이 확보되어 있어야 합니다. 또한, 질문자님처럼 고등학교 이상 졸업자이고 관련 자격증이 없는 경우, 최소 5 년 이상의 할랄 도축 경력이 필수적으로 요구됩니다. 만약 자격증이 있다면 경력 기간이 3 년으로 단축될 수 있습니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.103",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.108"
+    ],
+    "topic_key": "halal_slaughter_requirements",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Indonesia",
+      "topik_level": "TOPIK 4",
+      "situation": "An international student from Indonesia working or seeking to work in a domestic slaughterhouse as a Halal abattoir worker and needs to understand the specific facility and personnel requirements for the employer to issue an employment recommendation letter."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the conditions specified in the context on Page 103 regarding Halal slaughter employment: the employer must be certified by KKMF or have a dedicated line with at least 3 Muslim workers, and a high school graduate without a relevant certificate requires 5 years of experience (reduced to 3 years with a certificate)."
+  },
+  {
+    "id": "ko_middle_010",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 스포츠재활전공 1학년 유학생인데, 졸업할 때 채플 과목을 꼭 들어야 하나요? 외국 학생이니까 대신 들어도 되는 강의가 있나요? 그리고 채플 수업은 두 번 다 들어야 하는 건가요? 1학기나 2학기 중 한 번만 들어도 될지 궁금해서요. 졸업 요건에서 채플 부분이 어떤지 정확히 알고 싶습니다.",
+    "answer": "안녕하세요. 스포츠재활전공 1학년 유학생이시라면 채플 과목 대신 '한국어와 한국문화' 과목을 이수하면 졸업 요건을 충족할 수 있습니다. 일반 학생들은 채플 I과 채플 II를 모두 들어야 하지만, 외국인 유학생은 이 대체 과목으로 인정받습니다. 따라서 채플을 따로 수강하지 않아도 되며, 졸업 요건에서 채플 부분을 채우기 위해 해당 대체 과목을 신청하시면 됩니다. 구체적인 수강 방법은 강의시간표의 채플 안내사항을 참고하세요.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.34",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.67"
+    ],
+    "topic_key": "chapel_substitution",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "우즈베키스탄",
+      "topik_level": "3",
+      "situation": "스포츠재활전공 1학년 신입생으로 졸업 요건 중 채플 과목 이수 여부를 확인하려는 유학생"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context explicitly states on Page 34 that foreign students can substitute the Chapel requirement with the 'Korean Language and Korean Culture' course, and the answer accurately reflects this policy without contradicting the provided text."
+  },
+  {
+    "id": "ko_middle_011",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 한국에 1 달 이상 외부에 있다가 다시 들어온 유학생인데요, 국민건강보험 자격이 자동으로 다시 생기는지 궁금해요. 다시 등록하려면 무조건 재입국 후 국민건강보험공단에 직접 연락해야 한다는데, 그 외에는 어떤 절차가 필요한가요? 또 해외 체류 중 미납한 보험료를 다 내야 하는지, 또는 6 개월을 더 머물러야 하는지 명확히 알고 싶어서요.",
+    "answer": "한국을 떠나 31 일 이후에는 국민건강보험(N HIS) 자격이 소멸됩니다. 재입국 후 자격을 다시 얻으려면 반드시 도착 후 국민건강보험공단에 직접 연락하여 신청해야 합니다. 미납 보험료 처리는 비자 유형에 따라 다르며, D-2 비자 소지자는 미납료를 내지 않아도 되지만, 그 외 학생들은 체류 중 미납한 보험료를 모두 납부하거나 한국에서 6 개월 이상 체류해야 자격을 회복할 수 있습니다. 개인 정보 보호법에 따라 본인이 국민건강보험공사 전화(033-811-2000) 나 방문을 통해 개별적으로 문의하고 신청해야 합니다.",
+    "ref_pages": [
+      "외국인 유학생 국민건강보험 Health Insurance info. (KOR. ENG.) 수정완료.pdf p.6",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.17",
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.60"
+    ],
+    "topic_key": "NHIS re-acquisition",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Uzbekistan",
+      "topik_level": "TOPIK 4",
+      "situation": "An international student who was away from Korea for 1.5 months and has just returned to resume studies, needing to restore their health insurance status."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: eligibility is lost after 31 days, re-registration requires contacting NHIS, D-2 visa holders are exempt from unpaid fees while others must pay or stay 6 months, and inquiries must be made individually due to privacy laws."
+  },
+  {
+    "id": "ko_middle_012",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저 중국에서 온 유학생이고, 이번 달에 기숙사 관리비 공과금 지로 통지서를 받았는데, 제가 한국 계좌를 만들지 않아서 카드만 있어요. 은행 자동수납기에 가서 카드랑 지로만 넣고 결제할 수 있는지, 그리고 제가 흔한 은행을 이용하는데 수수료가 나올지 궁금해요. 만약 제 거래은행이 아닌 다른 은행에 가면 추가 요금이 발생하나요?",
+    "answer": "네, 은행 자동수납기를 이용하실 수 있습니다. 통장이 없어도 카드만 있으면 결제가 가능합니다. 지로통지서를 기계에 넣고 결제 버튼을 누른 후, 카드를 넣고 4자리 비밀번호를 입력하면 됩니다. 단, 수수료가 발생할 수 있으니 주의가 필요합니다. 안내에 따르면, 본인의 통장을 가지고 있는 '거래은행' (주거래 은행) 이 아닌 다른 은행의 기계를 이용할 경우 수수료를 내야 할 수 있습니다. 따라서 공과금 납부 수수료가 발생하지 않도록 되도록이면 본인이 거래하는 은행을 방문하여 납부하시기 바랍니다. 결제 후 발행되는 영수증은 증빙 자료로 반드시 보관해 주세요.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.35",
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.49"
+    ],
+    "topic_key": "utility_bill_payment",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "China",
+      "topik_level": "TOPIK 4",
+      "situation": "안개나 계좌가 없어서 카드로만 공과금을 내고 싶어 하며, 은행에 따라 수수료 발생 여부를 확인하려는 상황"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: it confirms that payment via card is possible at the machine, states that fees may apply when using a non-primary bank, and advises using the primary bank to avoid fees, all of which are explicitly supported by the provided text."
+  },
+  {
+    "id": "ko_middle_013",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저 이번 학기에 평균학점이 1.4 정도 돼서 학사경고 받을 것 같은데, 다음 학기에 수업을 얼마나 신청할 수 있나요? 일반 학생처럼 12학점만 들어야 하는지, 아니면 학사경고자 특례로 더 들을 수 있는지 알고 싶어요. 특히 전공 과목이 많아서 16학점 이상 등록하고 싶은데 가능할까요?",
+    "answer": "학사경고를 받으시면 다음 학기 수강신청 시 2학점이 제한됩니다. 하지만 학사경고자 대상으로는 최대 16학점을 초과하여 18학점까지 수강신청이 가능합니다. 평점평균이 1.5 미만인 경우 해당되므로, 16학점보다 많은 학점을 듣고 싶다면 18학점까지 신청할 수 있습니다.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.58",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.62"
+    ],
+    "topic_key": "academic_warning",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "A student concerned about their low GPA and worried about next semester's registration limits due to potential academic warning."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context on Page 58, which states that students with an academic warning (GPA < 1.5) are generally limited to 2 credits less but can register for up to 18 credits under the special provision for academic warning students."
+  },
+  {
+    "id": "ko_middle_014",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 현재 3학년에 재학 중인 외국인 유학생인데, 이번 학기에 수강 신청을 하려고 장바구니 기능을 사용하려고 해요. 그런데 신입생은 첫 학기에 이 기능을 쓸 수 없다고 하던데, 저처럼 2학년 이후인 재학생도 장바구니 미리 담기 제도를 이용할 수 있는지 궁금합니다. 희망 과목 30학점까지 미리 담아두고 본 수강신청 때 바로 신청할 수 있는지가 중요해서요. 혹시 학년 제한이 있는지, 아니면 모든 재학생이 다 이용할 수 있는지 알려주시면 감사하겠습니다.",
+    "answer": "안녕하세요, 재학생님. 장바구니 신청 제도는 해당 연도에 신규로 입학한 신입생 및 편입생에게만 첫 학기에 이용이 제한됩니다. 질문해주신 것처럼 2학년 이후에 재학 중인 유학생이시면 신입생이나 편입생이 아니므로, 이번 학기에 장바구니 기능을 정상적으로 이용하실 수 있습니다. 희망 과목과 예비 과목을 분리하여 최대 30학점까지 장바구니에 담으실 수 있으며, 본 수강신청 시작 시 장바구니에 담긴 과목을 검색 없이 바로 신청하실 수 있습니다. 다만, 장바구니에 담는 것만으로는 신청이 완료되지 않으니, 본 수강신청 기간 동안 반드시 [신청] 버튼을 눌러야 최종 신청이 완료된다는 점 참고해 주세요. 또한 희망 과목으로 담을 때는 동일 과목을 중복 신청할 수 없으며, 여러 분반을 담고 싶다면 하나는 희망으로, 나머지는 예비로 처리해야 합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.6",
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.55",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.155"
+    ],
+    "topic_key": "course_registration_cart",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "3",
+      "situation": "Currently a 3rd-year international student at BUFS wanting to use the shopping cart feature for course registration but unsure if there are grade-level restrictions."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context on Page 55 explicitly states that the cart system is unavailable only for new freshmen and transfer students in their first semester, and that it is available regardless of grade level for others. It also confirms the 30-credit limit and the requirement to click the 'Apply' button during the main registration period, which directly answers the user's question about eligibility and usage rules for a 3rd-year international student."
+  },
+  {
+    "id": "ko_middle_015",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 이번에 2025 년에 입학한 여학생인데 제2외성 생활관에 들어가고 싶어요. 그런데 기숙사에 식당이 없대서 걱정이 되는데, 밥은 어떻게 먹고 씻기는 시설은 뭐가 있나요? 그리고 2 인실과 3 인실 비용 차이가 얼마인지, 보증금도 같이 내야 하는지 정확하게 알고 싶어서요.",
+    "answer": "기숙사에는 별도의 식당이 없지만, 간이부엌에 조리시설과 냉장고가 있어서 학생들이 직접 음식을 만들어 먹을 수 있습니다. 시설로는 정독실, 헬스장, 휴게실, 조리실, 기도실, 세탁다림실이 구비되어 있습니다. 비용은 학기+방학 (약 5.5 개월) 기준 2 인실이 150 만 원, 3 인실이 116 만 7 천 원이며, 이 금액에는 10 만 원 보증금이 포함되어 있습니다. 퇴사 시 보증금은 환불 가능합니다.",
+    "ref_pages": [
+      "2025 년 BUFS 유학생 유학 로드맵.pdf p.81"
+    ],
+    "topic_key": "dormitory_facilities_cost",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 4",
+      "situation": "A female international student preparing to move into the off-campus dormitory and concerned about meal arrangements and exact housing costs."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects all details provided in the context regarding the lack of a cafeteria, available facilities (kitchen, study room, gym, etc.), room costs for 2 and 3 occupants, the inclusion of the deposit, and the refund policy."
+  },
+  {
+    "id": "ko_middle_016",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 현재 한국 선원에서 일하고 있는데, E-7-4 특정활동으로 체류 자격을 변경하고 싶어 합니다. 제가 연봉 3,000만 원을 받고 있고, 한국어 능력은 TOPIK 4 급을 취득했습니다. 나이도 30 대 초반이라 다른 조건은 다 맞는 것 같은데, 점수가 200 점 이상이면 바로 신청할 수 있는지, 그리고 어떤 서류가 필요한지 구체적으로 알려주세요.",
+    "answer": "E-7-4 체류 자격 변경을 원하시는군요. 현재 근무처에서 연 3,000 만 원 이상의 연봉을 받고 계신다면 기본소득 항목에서 80 점을 획득하실 수 있습니다. 또한 TOPIK 4 급 이상 소지 시 한국어 능력 항목에서 최대 120 점을 받을 수 있어, 나이 점수를 제외해도 이미 200 점 이상의 점수 조건을 충족하실 가능성이 높습니다. 다만, 최근 2 년간 평균 소득 증빙서류, 한국어 능력 증명서, 그리고 현재 근무처의 추천서 등이 필수적으로 필요합니다. 특히 추천서는 인구 감소 지역의 경우 지자체의 추천이 포함되면 추가 점수도 가능합니다. 점수 합산 후 200 점 이상이면 신청 자격이 되니, 관련 서류를 준비하여 관할 출입국 외국인청에 신청하시면 됩니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.47",
+      "Visa_Regulations.pdf p.129"
+    ],
+    "topic_key": "E7-4 qualification",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 4",
+      "situation": "Domestic ship crew member seeking E-7-4 status change based on salary and TOPIK score"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the scoring criteria and document requirements found in the context (Page 129). Specifically, the context confirms that an annual income of 30 million KRW yields 80 points, TOPIK Level 4 yields 120 points (totaling 200 points without age points), and lists the required documents such as income proof, language certificates, and employer recommendations."
+  },
+  {
+    "id": "ko_middle_017",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 35세 미만 외국인 유학생이고, 석사 학위를 받았어요. 한국에서 1년 6개월 동안 정규직으로 일했는데, 이때 경력과 학위 점수를 합산하면 총 몇 점을 받을 수 있나요? 한국어는 4급이고, TOPIK 점수랑 프로그램 점수 중 높은 거만 인정된다고 들었어요. 이 조건에서 점수 계산이 어떻게 되는지 정확히 알고 싶어요.",
+    "answer": "신청자님의 조건에 점수를 계산해 드리겠습니다. 먼저 연령은 35세 미만으로 15점을 획득합니다. 학위는 석사 학위이므로 일반 분야 기준으로 25점을 받습니다. 근무 경력은 1년 6개월로 '1년 이상 ~ 3년 미만'에 해당하여 5점을 획득합니다. 다만, 근무 경력 점수는 '단순 전문 분야' 근무 경력만 인정되므로 해당 부서에 확인이 필요합니다. 한국어 능력은 TOPIK 4급과 프로그램 4급 중 높은 점수인 15점을 적용합니다. 따라서 기초 점수 합계는 15(연령) + 25(학력) + 5(경력) + 15(언어) = 60점입니다. 다만, 유학 경력이나 가점 항목을 별도로 확인하셔야 합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.77",
+      "Visa_Regulations.pdf p.116"
+    ],
+    "topic_key": "visa_points_calculation",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "4",
+      "situation": "A master's graduate in their mid-30s with 1.5 years of regular employment in Korea seeking to calculate their visa eligibility points."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately calculates the points based on the provided context: Age (under 35) is 15 points, Master's degree is 25 points, 1.5 years of regular employment falls in the '1 year to under 3 years' category for 5 points, and the language score correctly takes the higher of TOPIK 4 or Program 4 (15 points). The total of 60 points is mathematically correct based on the context tables."
+  },
+  {
+    "id": "ko_middle_018",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "MIDDLE",
+    "question": "저는 결혼이민자인데 은행에서 저축할 때 특별히 좋은 상품이 있는지 궁금해서요. 제가 외국에서 왔고 가족과 함께 살기 때문에 보통 예금보다 이자가 더 높은 상품을 찾고 있어요. 은행에 갈 때 어떤 서류를 준비해야 상담을 받을 수 있는지 알려주세요.",
+    "answer": "결혼이민자를 위해 은행에서 높은 금리를 제공하는 저축상품이 있을 수 있습니다. 은행을 방문하실 때 가족관계증명서와 혼인관계증명서와 같은 필요서류를 지참하시고 상담을 받으시면 본인에게 유리한 상품을 찾아 가입하실 수 있습니다. 일반적으로 자유 입출금이 가능한 보통예금보다 정기적금이나 정기예금을 활용하면 목돈을 모으는 데 더 도움이 됩니다.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.41"
+    ],
+    "topic_key": "marriage_immigrant_savings",
+    "is_not_answerable": false,
+    "reasoning_type": null,
+    "persona": {
+      "country": "필리핀",
+      "topik_level": "TOPIK 4",
+      "situation": "한국에 온 지 15년 된 국제결혼 이민자로, 경제적인 어려움을 겪으며 저축 상품을 찾고 있음"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context, which states that banks may offer high-interest savings products for marriage immigrants and lists family relationship and marriage certificates as required documents for consultation."
+  },
+  {
+    "id": "ko_hard_001",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 현재 한국 기업에 재직 중인 외국인이어서 비자 문제로 교수님과 상담 중인데, 회사 사정이 울며 겨자 먹기로 '국내 복귀 기업'으로 전환했대요. 제가 가지고 있는 자격요건을 정리해 볼게요. 저는 관련 분야 학사 학위가 있고, 회사 해외 법인에서 1년 6개월만 재직했거든요. 그런데 '국내 복귀 기업 생산관리자' 자격요건에 따르면 관련 학사 소지자는 최소 6개월 근무만 있으면 된다고 나와 있고, 반면에 일반 '생산관리자' 직종 설명에는 특정 고용추천서 발급 기관이나 대기업 종사자 제한 같은 다른 조건들이 복잡하게 섞여 있어요. 만약 제가 '국내 복귀 기업'의 해외법인 근무 경험을 바탕으로 '국내 복귀 기업 생산관리자'로 신청하면, 최신 근무 경력 기간 (1.5 년) 이 학사 조건 (6 개월) 을 만족하니까 바로 고용추천서 발급이 가능할까요? 아니면 '일반 생산관리자' 기준에 맞춰서 다른 심사를 받아야 해서 불이익을 받을가요?",
+    "answer": "사용자의 상황을 분석해 보면, 우선 '국내 복귀 기업'으로 선정된 기업에서 해외 법인에 고용되어 근무한 배우자라는 점이 핵심입니다. 제공된 자료 Page 74 는 OCU 수강 관련 내용이라 비자 심사와는 무관하며, Page 59 와 Page 60 에 있는 '관리자 직종 (1212-1522)' 심사 기준을 적용해야 합니다. \n\n첫째, 사용자는 '국내 복귀 기업'으로 선정된 기업의 해외법인 근무자입니다. Page 59 우측 하단 '국내 복귀 기업 특례' 항목을 보면, '해외진출기업의 국내복귀 지원에 관한 법률' 제 7 조에 따라 선정된 기업에 해당합니다. \n\n둘째, 자격요건을 대조해 봅니다. 일반 생산관리자 (제품생산 관련 관리자) 의 경우 학력과 경력에 대한 일반 기준이 적용되거나 경력증명서 등이 필요할 수 있지만, '국내 복귀 기업' 특례 조항에서는 별도로 명시되어 있습니다. 구체적으로 Page 59 하단에 따르면, '국내 복귀 기업의 해외법인에 고용된 자 중 관련 분야 학사 이상 학위 소지자는 6 개월'의 근무경력만 있으면 된다고 명시되어 있습니다. \n\n셋째, 사용자의 경력 (1 년 6 개월) 을 적용합니다. 사용자는 학사 학위를 소지했고, 해외 법인에서 1 년 6 개월 (18 개월) 근무했습니다. 이는 특례 조건인 '최소 6 개월'을 충족합니다. \n\n따라서, 사용자는 별도의 추가 경력 (2 년 이상) 이나 복잡한 일반적인 심사 기준을 따를 필요 없이, '국내 복귀 기업 특례'에 해당하는 '학사 + 6 개월 이상 근무' 조건을 충족하므로, 고용추천서 발급이 가능합니다. 일반 생산관리자 기준과 혼동할 필요 없이 국내 복귀 기업 특례 기준이 우선 적용됩니다.\n\n결론: 네, '국내 복귀 기업 생산관리자' 자격으로 신청 가능합니다. 사용자의 1 년 6 개월 경력은 학사 소지자에 대한 필수 조건인 6 개월을 충분히 초과하여 충족하므로, 추가적인 경력 증빙 없이도 해당 자격 요건을 만족합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.59",
+      "Visa_Regulations.pdf p.60",
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.74"
+    ],
+    "topic_key": "domestic_return_manager",
+    "is_not_answerable": false,
+    "reasoning_type": "comparison",
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 6",
+      "situation": "Foreign employee working at a 'domestic return enterprise' overseas branch, holding a bachelor's degree in a relevant field with 1.5 years of experience."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer correctly identifies the relevant section in Page 59 regarding 'Domestic Return Enterprise' special provisions, accurately matches the user's qualifications (Bachelor's degree + 1.5 years experience) against the specific requirement (Bachelor's + 6 months), and logically concludes that the user is eligible for the employment recommendation letter under the special provision rather than the general criteria."
+  },
+  {
+    "id": "ko_hard_002",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 현재 2025 년에 입학한 베트남 국적 유학생이고, 한국어 능력은 TOPIK 3 급 수준이에요. 처음 한국에 와서 통장을 만들려고 하는데, 집에서 큰 현금을 보관하는 건 위험해서 은행에 맡기려고 해요. 그런데 은행과 농협이나 새마을금고 같은 비은행 금융기관 중 어디가 더 나을지 고민이에요. 은행은 다양한 서비스를 다 해준다고 하던데, 비은행 기관은 이자율이 더 높다고 하더라고요. 제가 통장을 만들면서 이자를 최대한 많이 받고 싶지만, 나중에 졸업 후 비자 변경이나 학비 관련 복잡한 일도 처리할 수 있어야 해서 둘의 장단점을 비교해 주실 수 있나요? 특히 저처럼 유학생에게 어떤 기관이 더 실무적으로 유리한지 판단 기준을 알려주세요.",
+    "answer": "질문하신 상황에 맞춰 두 가지 금융기관의 특징을 비교해 드리겠습니다.\n\n첫째, 서비스 범위를 보면 은행이 가장 포괄적입니다. 입금, 출금, 대출, 해외 송금, 환전, 카드 발급, 공과금 납부 등 돈과 관련된 거의 모든 업무를 처리할 수 있어 유학생 생활 전반에 필수적입니다. 비은행 기관인 농협, 새마을금고, 신용협동조합, 우체국 등도 은행과 유사한 서비스를 제공하지만, 대학생활이나 비자 관련 복잡한 금융 거래에서 은행만큼의 범용성을 보장하지는 않을 수 있습니다.\n\n둘째, 금리 측면에서는 비은행 기관이 유리합니다. 자료에 따르면 비은행 금융기관들은 은행보다 예금이자율과 대출이자율이 높은 편입니다. 따라서 질문자님께서 '이자 최대한 많이 받기'를 최우선 목표로 하신다면 비은행 기관이 수학적으로 더 이득입니다.\n\n하지만 종합적으로 판단할 때, 유학생으로서의 상황을 고려하면 다음과 같은 결론이 나옵니다. 비은행 기관의 높은 금리는 매력적이지만, 유학생은 졸업 후 비자 변경, 학비 납부, 해외 송금 등 은행의 특화 서비스를 자주 이용하게 됩니다. 또한 통장 개설이나 복잡한 금융 상담 시에는 집 근처의 방문이 필요할 수 있는데, 한국 전역에 지점이 가장 많이 분포되어 접근성이 높은 것은 은행 (특히 주요 시중은행) 입니다. 따라서 이자를 조금 더 받는 것보다 금융 거래의 안정성과 서비스의 범용성, 그리고 유학생으로서 겪을 수 있는 비자/학비 문제 해결의 편의성을 종합하면, 기본 계좌는 '은행'에 개설하고, 여유 자금이 생길 때만 이자를 비교하여 '비은행 기관'에 예치하는 것이 가장 현실적이고 안전한 전략입니다.\n\n결론적으로, 유학생 생활 전반의 편의성과 필수 서비스 보장을 위해 기본적으로는 은행을 이용하되, 이자 효율을 높이기 위해 여유 자금은 비은행 기관과 병행하여 활용하는 것을 추천합니다.",
+    "ref_pages": [
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.7",
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.8",
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.39",
+      "Visa_Regulations.pdf p.51",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.143"
+    ],
+    "topic_key": "financial_institution_comparison",
+    "is_not_answerable": false,
+    "reasoning_type": "comparison",
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 3",
+      "situation": "2025 international student needing to choose between banks and non-bank institutions for safety and interest rates"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the information in the context regarding the services offered by banks versus non-bank institutions and the interest rate differences. It correctly identifies that banks offer a wider range of services (deposits, withdrawals, lending, remittance, currency exchange, cards, bills) while non-bank institutions typically offer higher interest rates, and it logically applies this to the user's situation as a student."
+  },
+  {
+    "id": "ko_hard_003",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 인도네시아에서 온 D-2 비자 유학생이고, 2025 년 3 월 1 일 자로 한국에 입국해서 외국인등록을 마쳤습니다. 입국할 때 본국에서 사보험에 가입해 두었는데, 학교 안내에 따르면 해외 보험이 있으면 국내 단기 보험은 면제된다고 하더라고요. 그런데 제가 외국인등록을 완료한 지금, 국민건강보험에 자동 가입이 된 상태라면, 지금 당장 국내에서 추가로 사보험에 가입해야 하나요? 아니면 본국 보험 하나로도 학교 규정을 다 만족하는 건가요? 만약 추가 가입이 필요 없다면, 언제부터 그 보험이 유효한 건지도 궁금해요.",
+    "answer": "사용자분의 상황을 단계별로 분석해 보겠습니다.\n\n1. 먼저, 외국인등록을 마친 D-2 비자 소지자는 국민건강보험에 자동 가입됩니다. 이는 필수 사항이며, 사용자분은 이미 이 조건을 충족하셨습니다.\n2. 다음으로, 학교 규정에 따르면 입국 후 외국인등록 전 기간 (보통 1-3 개월) 동안은 국민건강보험 가입 전이므로 사보험 (단기 보험) 가입이 필수입니다. 하지만 본국에서 이미 사보험에 가입한 경우, 한국 내 중복 가입은 필요 없다고 명시되어 있습니다.\n3. 사용자분은 본국에서 사보험에 가입해 두었고, 현재는 외국인등록을 마쳐 국민건강보험에 가입된 상태입니다. 따라서 '국민건강보험 미가입 기간'이 이미 소멸되었고, 본국 보험이 본국 내에서 유효하다면 추가적인 국내 사보험 가입은 의무 사항이 아닙니다.\n4. 결론적으로, 본국 보험이 한국 체류 기간 중에도 유효하다면 별도의 국내 사보험 추가 가입은 불필요합니다. 다만, 본국 보험의 보장 범위와 유효 기간을 본국 보험사와 꼭 확인하여 한국 체류 기간 전체를 커버하는지 다시 한번 점검하시는 것을 권장합니다.\n\n따라서 정답은 '본국 사보험이 유효하다면 국내 추가 가입 불필요'입니다.",
+    "ref_pages": [
+      "외국인 유학생 국민건강보험 Health Insurance info. (KOR. ENG.) 수정완료.pdf p.1"
+    ],
+    "topic_key": "overseas_insurance_validity",
+    "is_not_answerable": false,
+    "reasoning_type": "inference",
+    "persona": {
+      "country": "Indonesia",
+      "topik_level": "TOPIK 4",
+      "situation": "International student who just completed foreigner registration and has existing insurance from home country, unsure about domestic short-term insurance requirement."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context explicitly states that D-2 visa students who have completed foreigner registration are automatically enrolled in National Health Insurance and that if they already have private insurance from their home country, they are exempt from mandatory domestic short-term insurance. The answer accurately reflects these rules found in the provided text."
+  },
+  {
+    "id": "ko_hard_004",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 현재 2025학년도에 입학한 필리핀 국적 유학생이고, 한국어 시험 (TOPIK) 은 3 급 상태예요. 이번 주 토요일에 친구를 만나러 가다가 학교 순회 버스를 타고 싶거든요. 그런데 친구가 토요일에는 학생증만 들고 타면 무료로 탈 수 있다고 하던데, 이건 맞나요? 내가 토요일에 버스를 무료로 탈 수 있는 조건과 불가능한 이유를 제가 가진 상황 (신분, 요일, 공휴일 여부 등) 을 모두 고려해서 설명해 주세요. 만약 유료라면 정확한 금액이나 지불 방법을 알려주세요.",
+    "answer": "먼저 제공된 자료 (p.95) 의 통학버스 안내 사항을 바탕으로 귀하의 상황을 단계별로 분석해 드리겠습니다.\n\n1. **운행 요일 확인**: 질문하신 대로 내일은 토요일입니다.\n2. **무료 탑승 규정 확인**: 자료에는 \"학생증 제시를 통한 무료탑승은 정규 및 계절학기 평일에만 이용 가능\"이라고 명시되어 있습니다.\n3. **예외 상황 확인**: 자료는 \"토·일요일, 공휴일, 학교 지정 휴무일, 동·하계 방학 중에는 일반 대중교통 요금 적용\"이라고 덧붙여 있습니다.\n\n**추론 과정**:\n귀하는 '토요일'이라는 요일 조건에 해당합니다. 규정상 무료 탑승이 허용되는 날은 오직 '평일'뿐이며, 토요일은 명시적으로 일반 대중교통 요금을 적용받아야 하는 날로 정의되어 있습니다. 따라서 친구의 말 (학생증만 있으면 무료) 은 평일 기준이었고, 토요일에는 적용되지 않습니다. 귀하의 TOPIK 등급이나 국적은 이 규정과는 무관합니다.\n\n**결론**:\n아쉽게도 토요일에는 학생증을 보여줘도 **무료로 탑승할 수 없습니다**. 이 경우 일반 대중교통 요금 (현금 또는 교통카드 결제) 을 내셔야 합니다. 학생증 제시로 무료가 되는 것은 평일에만 적용되는 특전임을 명심하시기 바랍니다.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.95"
+    ],
+    "topic_key": "weekend_bus_fare",
+    "is_not_answerable": false,
+    "reasoning_type": "inference",
+    "persona": {
+      "country": "Philippines",
+      "topik_level": "3",
+      "situation": "International student wanting to ride the campus shuttle bus on a Saturday and confused by a friend's incorrect advice about free travel."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context on Page 95, which states that free bus rides with a student ID are only available on weekdays during regular and seasonal semesters, while weekends (Saturday/Sunday) require payment of general public transport fares. The answer correctly identifies that the user's nationality and TOPIK level are irrelevant to this specific rule."
+  },
+  {
+    "id": "ko_hard_005",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 베트남에서 온 1 학년 유학생이고, 채플 I 과목이 정서적发展和를 위해 필수인데, 제가 이번 1 학기에 '한국어와 한국문화' 수업을 듣고 있어요. 교내 규정에서 외국인 유학생은 채플을 이 과목으로 대체할 수 있다고 되어 있는데, 지금 수강 중인 이 수업이 1 학점짜리 '채플 I' 대용으로 인정받아서 졸업 요건에 포함되는 건가요? 아니면 2 학점인 '채플 I'을 따로 들어야 하는지, 대체 가능할 때 학점 수까지 포함된 건지 헷갈려요. 제가 현재 수강 중인 '한국어와 한국문화'가 채플 대체 조건을 만족하는지, 그리고 그로 인해 졸업 필수 학점 채우기에 문제가 없는지 구체적으로 확인해 주세요.",
+    "answer": "질문하신 내용에 대해 단계별로 분석해 드리겠습니다.\n\n먼저, 제공된 학사제도 안내 (p.34) 를 보면 '채플 I' 과목 설명 하단에 '외국인 유학생은 '한국어와 한국문화' 교과목으로 대체 이수 가능'이라고 명시되어 있습니다. 이는 채플 I 을 별도로 수강하지 않고 해당 과목으로 대체할 수 있음을 의미합니다.\n\n두 번째로, 질문하신 '한국어와 한국문화' 수업의 학점 수에 대한 부분입니다. p.34 의 표에서 채플 I 은 1 학점으로 표시되어 있고, 대체 가능하다는 문구 바로 아래에는 별도의 학점 수명시가 없습니다. 일반적으로 '대체 이수 가능'이라는 규정은 해당 과목이 채플 I 의 기능과 목적을 수행하며, 졸업 요건상 필요한 '채플 I'의 1 학점을 충족시킨다는 전제하에 이루어집니다. 만약 대체 과목의 학점 수 (예: 2 학점이나 3 학점) 가 다달더라도, 채플 I 로서 요구되는 1 학점의 '필수 요건'은 충족되는 것으로 해석됩니다.\n\n따라서, 현재 수강 중인 '한국어와 한국문화' 수업을 통해 채플 I 의 대체 이수 요건을 충족했으며, 이는 졸업 요건상 필수인 채플 I 1 학점으로 인정받습니다. 추가적으로 1 학점을 더 들어야 하는 것이 아니며, 학점 수의 차이는 졸업 요건 충족에 영향을 미치지 않습니다.\n\n결론적으로, 수강 중인 과목이 채플 I 을 대체하여 졸업 필수 학점 (1 학점) 으로 인정받으므로 별도의 채플 I 수강은 필요 없습니다.",
+    "ref_pages": [
+      "2025 년+BUFS+ 유학생+유학+ 로드맵.pdf p.34"
+    ],
+    "topic_key": "chapel_credit_substitution",
+    "is_not_answerable": false,
+    "reasoning_type": "inference",
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 3",
+      "situation": "Freshman international student currently enrolled in 'Korean and Korean Culture' course, confused about whether it replaces the 1-credit 'Chapel I' requirement for graduation."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context on Page 34 explicitly states that international students can substitute 'Chapel I' with the 'Korean Language and Korean Culture' course. The answer correctly interprets this regulation to confirm that the substitution fulfills the graduation requirement without needing to take the original course or worry about credit discrepancies, as the substitution clause implies meeting the requirement."
+  },
+  {
+    "id": "ko_hard_006",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 베트남에서 온 도장기술자인데, 최근 5 년 전에 출국심사법 위반으로 인해 벌금 50 만 원을 받은 적이 있어요. 회사는 저를 E-9 비자로 고용할 계획인데, 이 벌금 기록 때문에 점수제가 적용되지 않아 지원 자체가 거절될까요? 아니면 벌금 100 만 원 미만이니까 감점만 받고 (최대 20 점), 나머지 조건을 충족하면 지원이 가능한가요? 제 기록이 '제외 대상'에 해당하는지, 아니면 단순히 '감점'만 받는 건지 정확히 판단해 주세요. 또한, 근무처 변경 시 조선해양플랜트 현장실사 보고서가 필수라고 들었는데, 제 경우처럼 전직 이력이 있고 벌금 기록이 있다면 이 서류 제출로 고용 허가 가능성을 높일 수 있는지 궁금해요.",
+    "answer": "사용자의 상황을 바탕으로 단계별로 분석해 드리겠습니다.\n\n1. **제외 대상 여부 판단 (p.121):** 규칙에 따르면 '벌금 100 만 원 이상'의 형을 받은 자가 제외 대상입니다. 사용자는 50 만 원 벌금형이었으므로, 이 기준에는 해당하지 않아 아예 지원이 불가능한 '제외 대상'은 아닙니다.\n2. **감점 적용 여부 (p.121):** '벌금 100 만 원 미만의 형을 받은 자'는 횟수에 따라 최대 20 점까지 감점이 적용됩니다. 따라서 사용자는 점수제 평가 대상에서 빠지지 않지만, 총점에서 최대 20 점까지 감점되어야 합니다. 이는 신청일 기준 10 년 이내의 건만 적용되므로, 5 년 전 기록은 감점 대상이 맞습니다.\n3. **근무처 변경 및 서류 영향 (p.107, p.121):** 근무처 변경 시 조선해양플랜트 현장실사 보고서 제출은 '부득이한 경우'나 '귀책 사유가 없는 경우'에 한정된 절차이며, 이는 제도 남용 방지를 위한 점검 수단입니다. 벌금 기록이 있다고 해서 이 서류 제출로 고용 허가 가능성이 높아지거나 낮아지는 직접적인 인과관계는 규정상에 명시되어 있지 않습니다. 다만, 감점된 점수를 보완하기 위해 고용업체의 요건 (현재 외국인 고용 현황, 고용보험 가입자 수 등) 을 완벽히 충족하고, 사회통합 프로그램 이수 같은 가산점 요소가 있다면 합격을 시도할 수는 있습니다.\n\n**결론:** 사용자는 즉시 지원이 거절되는 '제외 대상'이 아닙니다. 하지만 벌금 50 만 원 기록으로 인해 점수 계산 시 최대 20 점 감점을 받으며, 이 감점을 상쇄할 만큼의 다른 가산점이나 고용업체의 높은 요건 충족도가 필요합니다. 현장실사 보고서 제출은 필수 절차일 뿐, 벌금 기록을 덮어줄 수 있는 직접적인 해결책은 아닙니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.107",
+      "Visa_Regulations.pdf p.121",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.158"
+    ],
+    "topic_key": "visa_penalty_calculation",
+    "is_not_answerable": false,
+    "reasoning_type": "inference",
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 4",
+      "situation": "Painting technician with a past minor criminal record (500,000 KRW fine) applying for E-9 visa under the points system."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context: Page 121 confirms that a fine under 1 million KRW results in a point deduction (max 20 points) rather than exclusion (which requires 1 million KRW or more), and Page 107 clarifies that the shipyard inspection report is a mandatory procedure for work site changes to prevent abuse, not a mechanism to offset criminal records."
+  },
+  {
+    "id": "ko_hard_007",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 방글라데시 국적인데, 전액 장학금 조건부 외국인 유학생으로 합격해서 내국인 부모님이 후견인이 되어 주기로 했어요. 그런데 불법 체류 다발국가 국민이라는 이유로 부모님의 재정 능력 입증 서류도 같이 제출해야 한다고 하더라고요. 제가 창의적으로 생각해보니, 후견인인 부모님이 직접 학교 기숙사 입소 확인서를 받으면 그 조건이 면제될 수도 있지 않을까 싶어서요. 근데 문서를 다시 보니 기숙사 입소 확인서 제출은 '후견인 자격 대상자'라는 표현만 나와 있고, '불법 체류 다발국가'라는 특정 국가 국민에 대한 예외 조항과는 명확히 연결되어 있지 않네요. 부모님이 기숙사 입소 확인서를 낼 때, 제가 불법 체류 다발국가 국민인 점까지 고려해서 재정 서류 제출이 면제되는지, 아니면 국가 국민 조건 때문에 무조건 예외 없이 부모님 재정 증빙을 모두 다 제출해야 하는지 명확히 알고 싶어요. 두 조건이 충돌할 때 어떤 게 우선 적용되는지 판단 근거와 함께 알려주실 수 있나요?",
+    "answer": "사용자의 상황을 분석해 보면, 방글라데시 국적자이면서 전액 장학금 조건부 외국인 유학생이고, 부모님이 후견인이 되는 경우입니다. 문서는 '불법 체류 다발국가 국민'에 한하여 후견인의 재정 능력 입증 서류와 가족 관계 입증 서류를 추가로 제출하도록 명시하고 있습니다. 또한, 후견인 자격 대상자가 학교장의 '기숙사 입소 확인서'를 제출할 수 있다는 점은 포함되어 있으나, 이는 재정 능력 입증 서류의 제출 의무를 면제해 주는 조항이 아닙니다. 문서상에서 '불법 체류 다발국가 국민'이라는 조건은 예외 조항을 설정하는 것이 아니라, 오히려 추가 서류 제출을 의무화하는 조건으로 작용합니다. 따라서 방글라데시가 불법 체류 다발국가로 분류된다면, 후견인인 부모님이 기숙사 입소 확인서를 제출하더라도 예외적으로 재정 서류 제출이 면제되지 않으며, 문서에 명시된 대로 부모님의 재정 능력 입증 서류와 가족 관계 증명 서류를 반드시 제출해야 합니다. 결론적으로 기숙사 입소 확인서 제출 여부와 관계없이, 불법 체류 다발국가 국민이라는 조건이 충족되면 재정 증빙 서류 제출은 필수입니다.",
+    "ref_pages": [
+      "2025년+BUFS+유학생+유학+로드맵.pdf p.17",
+      "Visa_Regulations.pdf p.18",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.21",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.59"
+    ],
+    "topic_key": "visa_documentation_conflict",
+    "is_not_answerable": false,
+    "reasoning_type": "inference",
+    "persona": {
+      "country": "Bangladesh",
+      "topik_level": "TOPIK 4",
+      "situation": "Full scholarship conditional international student from Bangladesh with parents as guardians, questioning if dormitory confirmation exempts financial proof requirement for high-risk nationalities."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context on Page 18 explicitly states that financial capability proof and family relationship documents are required specifically for nationals of countries with frequent illegal stays ('불법체류 다발국가 국민에 한함'). It also clarifies that the 'Dormitory Admission Certificate' is an alternative for those exempt from the guardian requirement, but does not list it as an exception to the financial document requirement for nationals of high-risk countries. Therefore, the answer correctly deduces that the nationality condition overrides the dormitory certificate option regarding financial proof."
+  },
+  {
+    "id": "ko_hard_008",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 일본인이고 소프트웨어 개발자 자격증이 있는데, 골드카드 고용추천 제도를 통해 비자 변경을 하려고 해요. 제가 한국 대학에서 석사 학위를 땄고 분야 경력은 1년도 안 된 상태거든요. 그런데 제가 속한 직종이 IT 분야인데다 자격증도 있으니까 경력 1년 이상 요건이 면제되는 건가요? 아니면 학사 이상 + 1년 경력 요건이 그대로 적용돼서 거절될까요? 이 두 조건이 충돌할 때 어떤 게 우선인지 구체적으로 알려주세요.",
+    "answer": "학생님의 상황을 분석해 보겠습니다. 먼저 자료 43페이지를 보면, 일반적으론 학사 이상 소지자의 경우 고용의 필요성이 인정받더라도 '1년 이상의 경력'이 필수 요건입니다. 그러나 동 페이지 하단에 있는 '특정 일본인 소프트웨어 기술자' 우대 규정을 보면, 일본 정보처리개발협회에서 인정하는 자격증(소프트웨어 개발기술자 등)을 소지한 일본인의 경우 '자격 기준과 무관하게' 비자 발급을 허용한다고 명시되어 있습니다. \n\n여기서 논리적 추론이 필요합니다. 일반 조항(경력 1년 필수)과 특별 조항(자격증 소지 일본인 무조건 허용)이 공존할 때, 특별 규정이 일반 규정보다 우선 적용됩니다. 학생님은 석사 학위와 일본인 소프트웨어 개발자 자격증을 모두 보유하고 있으므로, 특별 우대 대상에 해당합니다. 따라서 일반적인 경력 1년 요건은 면제되므로 비자 변경이 가능합니다. 단, 52페이지에 명시된 대로 실제 고용계약서에 명시된 연봉과 근무 시간이 당해 연도 최저임금 요건(시급 및 월급 모두 충족)을 만족해야 한다는 점만 추가로 확인하시면 됩니다. 결론적으로 경력 1년 요건은 면제되어 신청 가능합니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.43",
+      "Visa_Regulations.pdf p.52",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.145"
+    ],
+    "topic_key": "visa_qualification_exemption",
+    "is_not_answerable": false,
+    "reasoning_type": "inference",
+    "persona": {
+      "country": "Japan",
+      "topik_level": "N/A",
+      "situation": "Japanese software developer with master's degree and certified qualification, seeking visa change with less than 1 year of Korean work experience"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context on Page 43, which states that Japanese nationals holding specific software developer qualifications are allowed visa issuance 'regardless of qualification criteria,' overriding the general 1-year experience requirement. It also correctly references the wage requirements mentioned on Page 52."
+  },
+  {
+    "id": "ko_hard_009",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 2019학번인데, 주전공만 들었어요. 졸업하기 위해선 기존에 66학점을 들었어야 했는데, 최신 규정에 따라 54학점으로 줄었나요? 근데 만약 제가 이 2019학번 기준을 적용받지 못해서 예전 66학점 규정을 따라야 한다면, 부전공까지 들었는데 부전공 졸업시험을 보지 않아도 된다는 게 말이 돼요? 부전공은 시험이 없는데, 졸업학점이 늘어나면 졸업 시험 조건이 어떻게 적용되는지 헷갈려요. 2017~2020학번 전공 학점 변경 규정과 부전공 졸업시험 면제 조항을 비교해서, 제 경우(주전공 1개+부전공 1개, 2019학번)에 졸업학점과 시험 조건이 어떻게 정해지는지 정확히 알려주세요.",
+    "answer": "질문하신 상황에 대한 답변은 다음과 같습니다.\n\n1. **졸업학점 적용 기준 (2017~2020학번):**\n   안내 자료 (p.45) 에 명시된 '2017~2020학번 전공 이수 학점 변경' 항목을 보면, 단일전공 취득 시 주전공 이수 학점이 기존 66학점에서 54학점으로 변경되었습니다. 질문자님은 2019학번이시므로 이 변경 규정을 적용받습니다. 따라서 주전공만 이수한 경우 66학점이 아니라 **54학점**만 충족하면 됩니다.\n\n2. **부전공과 졸업시험 조건:**\n   자료 (p.45) 의 '② 전공졸업시험' 항목을 보면, '부전공과 마이크로전공은 전공졸업시험 없습니다'라고 명시되어 있습니다. 질문자님은 주전공 1개와 부전공 1개를 이수하셨으므로, **주전공에 대한 졸업시험만 통과**하면 되고 부전공에 대한 졸업시험은 필요하지 않습니다. 이는 학점 수 (66 vs 54) 와 무관하게 부전공 자체의 특성이 적용되는 규칙입니다.\n\n3. **종합 결론:**\n   질문자님의 경우, 2019학번이므로 **주전공 54학점**을 이수하면 되며, 부전공은 이수 시 **졸업시험 대상에서 제외**됩니다. 따라서 학점이 줄어들었다고 해서 부전공 시험 조건이 달라지거나, 부전공을 들었기 때문에 주전공 시험 조건이 복잡해지는 일은 없습니다. 최종적으로는 주전공 54학점 이수 + 주전공 졸업시험 합격 + 어학 요건 (TOPIK 4 급 이상 등) 을 충족하면 졸업 가능합니다. 부전공은 학점은 인정되지만 시험은 면제되는 구조입니다.",
+    "ref_pages": [
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.45",
+      "2025 년+BUFS+유학생+유학+로드맵.pdf p.63",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.74",
+      "Visa_Regulations.pdf p.95",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.134"
+    ],
+    "topic_key": "graduation_credit_rules",
+    "is_not_answerable": false,
+    "reasoning_type": "comparison",
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "TOPIK 5",
+      "situation": "2019 intake student with one major and one minor, confused about the transition from 66 to 54 major credits and whether the minor exemption from exams still applies under the old credit count."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The answer accurately reflects the context on Page 45, confirming that 2019 students (2017-2020 cohort) have a reduced major credit requirement of 54 credits (down from 66) and that minors are exempt from the major graduation exam regardless of credit count."
+  },
+  {
+    "id": "ko_hard_010",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "HARD",
+    "question": "저는 인도국적으로서 한-인도 CEPA 전문직종에 해당하는 생물학자 박사학위를 소유했고, 국내의 한 생명공학 기업과 서비스 공급계약을 맺고 입국하려고 해요. 그런데 고용보험 가입 내국인 수가 적어 '고용추천서' 발급이 안 된다는 소식이 들렸어요. 한편, 저는 기계설계 기사가 아니라서 제 30 번 직종인 제도사 자격증은 없고요. 제 상황처럼 '한-인도 CEPA 전문인력'으로 입국하려면 고용추천서가 필수인 건가요, 아니면 제출서류만 완비하면 심사기관에서 면제해 주는 걸까요? 두 가지 직종별 심사기준을 비교해서 제 경우엔 어떤 경로로 신청해야 하는지 알려주세요.",
+    "answer": "사용자님의 상황을 분석해 보면, 먼저 '한-인도 CEPA 전문가' 직종 (페이지 49) 의 경우 특정 직종 (162 개) 에 해당하며, 생물학자의 경우에는 박사학위 소지가 자격요건에 명시되어 있습니다. 이 직종의 경우 제출서류 목록에 '고용추천서'가 포함되지 않으며, 대신 '서비스제공계약서', '법인과기인사업자의 법인등기부등본', '학력증명서', '경력증명서' 등이 필수입니다. 반면, 페이지 77 의 '영세사업자'나 '제 30 번 제도사' 직종의 경우에는 고용추천서 발급이 명시되어 있거나, 고용보험 가입 내국인 수 요건이 충족되어야만 인정받는 조건이 있습니다. 따라서 사용자님은 '한-인도 CEPA' 협정 대상자로서, 별도의 고용추천서 없이도 계약서와 자격증명 서류를 갖추어 입국심사를 받을 수 있습니다. 결론적으로, 생물학자 박사학위 소지자로서 CEPA 전문직종에 해당한다면 고용추천서 없이도 직접 서류를 제출하여 심사받으시면 됩니다.",
+    "ref_pages": [
+      "Visa_Regulations.pdf p.49",
+      "Visa_Regulations.pdf p.77",
+      "외국인을 위한 금융생활 가이드북_영어_낱장.pdf p.108"
+    ],
+    "topic_key": "CEPA_expert_visa",
+    "is_not_answerable": false,
+    "reasoning_type": "comparison",
+    "persona": {
+      "country": "India",
+      "topik_level": "N/A (Visa applicant under CEPA)",
+      "situation": "PhD holder in Biology applying as an independent expert under the Korea-India CEPA agreement, confused about whether a 'Employment Recommendation Letter' is required compared to other visa types."
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "The context on Page 49 explicitly lists the required documents for 'Korea-India CEPA Experts' (including biologists with a PhD) and does not include an 'Employment Recommendation Letter' (고용추천서). In contrast, Page 77 indicates that the 'Draftsman' (제 30 번 직종) category requires an Employment Recommendation Letter. Therefore, the answer correctly identifies that the user, as a biologist under the CEPA agreement, does not need the Employment Recommendation Letter and can proceed with the other listed documents."
+  },
+  {
+    "id": "ko_not_answerable_001",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "NOT_ANSWERABLE",
+    "question": "학기 중 재학증명서 재발급 시 '정신건강 상담 내역'이 포함된 통합파악증명서를 요청할 수 있나요? 만약 가능하다면 수수료는 별도인가요?",
+    "answer": "제공된 문서에는 재학증명서 발급 절차나 '정신건강 상담 내역'이 포함된 통합파악증명서 요청 여부와 관련 수수료에 대한 내용은 포함되어 있지 않습니다.",
+    "ref_pages": [],
+    "topic_key": "mental_health_certificate_fee",
+    "is_not_answerable": true,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "4",
+      "situation": "Scholarship application requiring comprehensive health records"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "not_answerable — validation skipped"
+  },
+  {
+    "id": "ko_not_answerable_002",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "NOT_ANSWERABLE",
+    "question": "저희 학교에서 기숙사 입사자 중 성적우수자에게 주는 '夜間대학 특별장학금'은 존재하나요? 있다고 하면 신청 기간이 언제인가요?",
+    "answer": "제공된 문서에는 '야간대학 특별장학금'에 대한 내용은 포함되어 있지 않습니다. 현재 제공된 자료에는 비자 발급 증명서류, 인터넷 뱅킹 보안 수칙, 그리고 일반 금융 카드 사용 시 주의사항 등이만記載되어 있을 뿐, 특정 야간대학 학점을 위한 장학금 제도에 대한 정보는 찾을 수 없습니다.",
+    "ref_pages": [],
+    "topic_key": "night_university_scholarship",
+    "is_not_answerable": true,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "4",
+      "situation": "Part-time student asking about a specific night-division scholarship"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "not_answerable — validation skipped"
+  },
+  {
+    "id": "ko_not_answerable_003",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "NOT_ANSWERABLE",
+    "question": "국제결혼 이주여성에게 제공되는 '다문화 가족 학업 장려금' 신청 자격과 금액을 알 수 있을까요?",
+    "answer": "문의하신 '다문화 가족 학업 장려금'에 대한 내용은 현재 제공된 문서(저축 상품 및 금융 지혜 관련 자료) 에 포함되어 있지 않아 확인이 어렵습니다.",
+    "ref_pages": [],
+    "topic_key": "multicultural_family_scholarship",
+    "is_not_answerable": true,
+    "reasoning_type": null,
+    "persona": {
+      "country": "필리핀",
+      "topik_level": "4",
+      "situation": "국제결혼으로 한국에 거주 중인 이주 여성"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "not_answerable — validation skipped"
+  },
+  {
+    "id": "ko_not_answerable_004",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "NOT_ANSWERABLE",
+    "question": "재학 중인 외국인 유학생이 신청할 수 있는 '겨울방학 특별 장학금'은 있나요? 신청 기간과 필요 서류를 알려주세요.",
+    "answer": "'겨울방학 특별 장학금'에 대한 정보는 제공된 문서에 포함되어 있지 않습니다. 현재 제공된 자료에는 모바일 뱅킹 이용 방법, 저축 상품 소개, 그리고 보험 가입 시 고지의무에 관한 내용만 있습니다.",
+    "ref_pages": [],
+    "topic_key": "winter_break_scholarship",
+    "is_not_answerable": true,
+    "reasoning_type": null,
+    "persona": {
+      "country": "Vietnam",
+      "topik_level": "4",
+      "situation": "seeking financial aid for winter break"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "not_answerable — validation skipped"
+  },
+  {
+    "id": "ko_not_answerable_005",
+    "language": "ko",
+    "lang_name": "Korean",
+    "difficulty": "NOT_ANSWERABLE",
+    "question": "BUFS에서 운영하는 '夜間 장학금'이라는 게 있는데, 주야간 병행 수업 듣는 유학생도 신청 가능한가요?",
+    "answer": "제공된 문서에는 '야간 장학금'이나 주야간 병행 수업 관련 장학금 제도에 대한 내용이 포함되어 있지 않아 해당 정보를 확인해 드릴 수 없습니다. 정확한 내용은 대학 홈페이지나 학생지원과에 직접 문의해 보시기를 권장합니다.",
+    "ref_pages": [],
+    "topic_key": "night_class_scholarship_eligibility",
+    "is_not_answerable": true,
+    "reasoning_type": null,
+    "persona": {
+      "country": "베트남",
+      "topik_level": "TOPIK 3",
+      "situation": "주임수업과 야간수업을 병행하는 유학생"
+    },
+    "model": "/home/bufsgpu/Hugging-Face/models/Qwen3.5-122B-A10B-FP8",
+    "is_valid": true,
+    "valid_reason": "not_answerable — validation skipped"
+  }
+]

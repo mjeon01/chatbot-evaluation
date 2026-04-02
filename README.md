@@ -9,85 +9,44 @@
 ## 전체 아키텍처
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│              INPUT: 부산외국어대학교 관련 규정 PDF                 │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 1: PDF 전처리  [step1_preprocess_pdf.py]                   │
-│                                                                 │
-│  ./data/ 내 모든 PDF 자동 순회                                    │
-│  PyMuPDF(fitz) → 페이지별 텍스트 추출                             │
-│                                                                 │
-│  출력: { "source": "파일명.pdf", "page": 1, "content": "..." }   │
-│        → output/context/refined_context.json                   │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │  output/context/refined_context.json
-                           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 2: 다국어 QA 생성  [step2_generate_qa.py]                  │
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  언어별 루프 (KO / EN / ID / VI / UZ)                    │   │
-│  │                                                         │   │
-│  │  ┌─────────────────────────────────────────────────┐   │   │
-│  │  │  난이도별 루프                                    │   │   │
-│  │  │                                                 │   │   │
-│  │  │  EASY   (17개) → 페이지 1개 선택                 │   │   │
-│  │  │  MIDDLE (17개) → 페이지 2~3개 선택               │   │   │
-│  │  │  HARD   (16개) → 페이지 3개+ 선택                │   │   │
-│  │  │                    │                            │   │   │
-│  │  │                    ▼                            │   │   │
-│  │  │          Ollama 로컬 모델 호출                   │   │   │
-│  │  │  ┌─────────────────────────────────────────┐   │   │   │
-│  │  │  │  KO: qwen2.5:32b / exaone3.5:32b        │   │   │   │
-│  │  │  │  EN: llama3.1:8b  / qwen2.5:32b         │   │   │   │
-│  │  │  │  ID: qwen2.5:32b  / llama3.1:8b         │   │   │   │
-│  │  │  │  VI: qwen2.5:32b  / llama3.1:8b         │   │   │   │
-│  │  │  │  UZ: qwen2.5:32b  / llama3.1:8b         │   │   │   │
-│  │  │  └─────────────────────────────────────────┘   │   │   │
-│  │  │                    │                            │   │   │
-│  │  │                    ▼                            │   │   │
-│  │  │          LLM-as-Judge 검증                      │   │   │
-│  │  │          (생성 모델 ≠ 검증 모델)                  │   │   │
-│  │  │                    │                            │   │   │
-│  │  │          ┌─────────┴──────────┐                │   │   │
-│  │  │          │ 통과               │ 실패            │   │   │
-│  │  │          ▼                   ▼                 │   │   │
-│  │  │       저장               재시도 (최대 3회)       │   │   │
-│  │  └─────────────────────────────────────────────────┘   │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                                                                 │
-│  번역 방향: 언어별 독립 생성 (직접 생성, 번역 아님)               │
-│  번역 도구: facebook/nllb-200 (우즈벡어 등 저자원 언어 보조용)    │
-│                                                                 │
-│  출력: output/qa_raw/qa_ko_raw.json / qa_en_raw.json / ...     │
-│        output/qa_raw/qa_dataset_raw.json (통합)                 │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │  qa_dataset_raw.json
-                           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 3: 후처리 및 최종 출력  [step3_postprocess.py]             │
-│                                                                 │
-│  규칙 기반 필터링 (언어별 최소 길이 기준 적용)                     │
-│  ├─ 질문 길이 미달 → 제거  (ko:10자 / en,id:20자 / vi,uz:15자)   │
-│  ├─ 답변 길이 미달 → 제거  (ko:15자 / en,id:30자 / vi:25자 / uz:20자) │
-│  ├─ 질문에 답변 포함 → 제거                                      │
-│  └─ 참조 페이지 없음 → 제거                                      │
-│                                                                 │
-│  중복 제거 (언어 + 난이도 내 topic_key 기반)                      │
-│                                                                 │
-│  최종 저장                                                       │
-│  ├─ output/qa_final/qa_ko_final.json                           │
-│  ├─ output/qa_final/qa_en_final.json                           │
-│  ├─ output/qa_final/qa_id_final.json                           │
-│  ├─ output/qa_final/qa_vi_final.json                           │
-│  ├─ output/qa_final/qa_uz_final.json                           │
-│  ├─ output/qa_final/qa_dataset_final.json (통합)                │
-│  └─ output/qa_final/qa_filter_log.json (필터링 로그)            │
-└─────────────────────────────────────────────────────────────────┘
+PDF 파일 (data/)
+     │
+     ▼
+[추출 단계] step1_preprocess_pdf.py
+     │  텍스트 레이어 있음?
+     ├─ Yes → PyMuPDF 직접 추출
+     └─ No  → EasyOCR 폴백 (한국어 + 영어)
+     │
+     ▼
+[생성 단계] step2_generate_qa.py
+     │
+     │  한국어 우선 워크플로우
+     ├─ 1단계: 한국어 QA 생성
+     │            ↓ 수동 검수
+     ├─ 2단계: 한국어 → 영어 번역
+     │            ↓
+     └─ 3단계: 영어 → 인도네시아어 / 베트남어 / 우즈벡어 번역
+     │
+     │  난이도별 생성
+     ├─ EASY           간결한 단일 사실 질문
+     ├─ MIDDLE         상황 설명 포함, 복합 질문
+     ├─ HARD           비교·대조·추론 필수
+     └─ NOT_ANSWERABLE 문서에 없는 질문 (환각 탐지)
+     │
+     │  생성 후 LLM-as-Judge 검증
+     │
+     ▼
+[후처리 단계] step3_postprocess.py
+     │  규칙 기반 필터링 (언어별 최소 길이)
+     │  중복 제거 (토픽 키 기반)
+     │
+     ▼
+최종 QA 데이터셋
+     ├─ 언어별 JSON (ko / en / id / vi / uz)
+     └─ 통합 JSON + 필터링 로그
 ```
+
+[업데이트 2026-04-02] 기존에는 단일 언어(한국어)만 직접 생성했으나, 현재는 한국어 우선 생성 후 검수 → 영어 번역 → 다국어 번역 순서로 진행한다. 추출 단계에서는 이미지 PDF 대응을 위해 EasyOCR 폴백이 추가됐으며, 생성 모델은 Ollama에서 vLLM(Qwen3.5-122B FP8)으로 교체됐다. NOT_ANSWERABLE 난이도가 새로 추가돼 챗봇 환각 탐지 평가가 가능해졌다.
 
 ---
 
@@ -101,21 +60,20 @@
   "language": "ko",
   "lang_name": "Korean",
   "difficulty": "EASY",
-  "question": "졸업 이수 학점은 몇 학점인가요?",
+  "question": "2025년도 입학한 외국인 유학생인데요, 졸업하려면 총 몇 학점 채워야 하나요?",
   "answer": "졸업 이수 학점은 총 130학점이며...",
   "ref_pages": [{"source": "2026학년도1학기학사안내.pdf", "page": 3}],
   "topic_key": "graduation credits",
+  "is_not_answerable": false,
+  "reasoning_type": null,
   "persona": {
     "country": "Vietnam",
     "topik_level": "TOPIK 2급",
     "situation": "Anxious about graduation requirements"
   },
-  "model": "qwen2.5:32b",
-  "validator": "llama3.1:8b",
+  "model": "/home/.../Qwen3.5-122B-A10B-FP8",
   "is_valid": true,
-  "valid_reason": "Answer is directly supported by context",
-  "elapsed_sec": 4.2,
-  "created_at": "2025-01-01T12:00:00"
+  "valid_reason": "Answer is directly supported by context"
 }
 ```
 
@@ -123,71 +81,60 @@
 
 | 난이도 | 개수/언어 | 참조 페이지 | 설명 |
 |--------|-----------|-------------|------|
-| **EASY**   | 17개 | 1개      | 단일 페이지에서 직접 확인 가능한 사실 질문 |
-| **MIDDLE** | 17개 | 2~3개    | 여러 페이지 정보를 연결해야 답변 가능 |
-| **HARD**   | 16개 | 3개 이상 | 복합적 추론이 필요한 심화 질문 |
+| **EASY**           | 17개 | 1개      | 간결한 단일 사실 질문 |
+| **MIDDLE**         | 18개 | 2~3개    | 상황 설명 포함, 여러 페이지 정보 연결 |
+| **HARD**           | 10개 | 3개 이상 | 조건/상황 명시 필수, 비교·대조·추론 패턴 |
+| **NOT_ANSWERABLE** |  5개 | 없음     | 1~2문장, 문서에 없는 그럴듯한 질문 (환각 탐지) |
 
-### 언어 및 모델 구성
+### 모델 구성
 
-| 언어 | 코드 | 생성 모델 | 검증 모델 | 번역 보조 |
-|------|------|-----------|-----------|-----------|
-| 한국어      | `ko` | qwen2.5:32b / exaone3.5:32b | llama3.1:8b | -    |
-| 영어        | `en` | llama3.1:8b / qwen2.5:32b  | qwen2.5:32b | -    |
-| 인도네시아어 | `id` | qwen2.5:32b / llama3.1:8b  | llama3.1:8b | NLLB |
-| 베트남어    | `vi` | qwen2.5:32b / llama3.1:8b  | llama3.1:8b | NLLB |
-| 우즈벡어    | `uz` | qwen2.5:32b / llama3.1:8b  | llama3.1:8b | NLLB |
+| 역할 | 모델 | 비고 |
+|------|------|------|
+| QA 생성 / 번역 / 검증 | Qwen3.5-122B-A10B-FP8 | vLLM, H100 × 2 |
+
+### 번역 체인
+
+```
+KO (생성) → EN (번역) → ID / VI / UZ (번역)
+```
 
 ---
 
 ## 실행 방법
 
 ```bash
-# 환경 설치
-pip install pymupdf transformers tqdm requests
+# Step 1: PDF 전처리
+python src/step1_preprocess_pdf.py
 
-# Ollama 모델 준비
-ollama pull qwen2.5:32b
-ollama pull llama3.1:8b
-ollama pull exaone3.5:32b
-ollama serve  # 별도 터미널에서 실행
+# Step 2: QA 생성 (한국어 우선 워크플로우)
+python src/step2_generate_qa.py --stage ko          # 한국어 생성 → 수동 검수
+python src/step2_generate_qa.py --stage en          # 한국어 → 영어 번역
+python src/step2_generate_qa.py --stage multilingual # 영어 → ID/VI/UZ 번역
 
-# 파이프라인 순서대로 실행
-python step1_preprocess_pdf.py     # PDF → refined_context.json
-python step2_generate_qa.py        # → qa_dataset_raw.json
-python step3_postprocess.py        # → qa_dataset_final.json
+# (또는 전체 직접 생성)
+python src/step2_generate_qa.py --stage all
+
+# Step 3: 후처리
+python src/step3_postprocess.py
+```
+
+### 환경 설치
+
+```bash
+pip install pymupdf easyocr numpy vllm
 ```
 
 ---
 
 ## 중복 방지 전략
 
-각 언어는 **독립적으로 별도 질문을 생성**합니다 (번역 금지).
-
 - 내부적으로 `topic_key`를 기록하여 같은 언어 내 중복 방지
 - 생성 프롬프트에 `history` 파라미터로 이미 사용한 토픽 전달
-- 언어별로 다른 모델 조합을 사용해 생성 다양성 확보
 - 페르소나를 LLM이 자동 생성하여 질문 스타일 다양화
-
-```
-KO: "졸업 요건은 어떻게 되나요?"              → topic_key: "graduation requirements"
-EN: "What are the admission procedures?"       → topic_key: "admission process"
-ID: "Berapa kredit yang harus diselesaikan?"   → 독립 생성
-VI: "Yêu cầu tốt nghiệp là gì?"               → 독립 생성
-UZ: "Kursni yakunlash uchun talablar nima?"    → 독립 생성
-```
 
 ---
 
 ## 품질 관리
-
-### 이중 검증 구조
-
-```
-[생성 모델]            [검증 모델]
-qwen2.5:32b      →    llama3.1:8b   (서로 다른 모델로 교차 검증)
-exaone3.5:32b    →    llama3.1:8b
-llama3.1:8b      →    qwen2.5:32b
-```
 
 ### 필터링 단계
 
@@ -197,8 +144,6 @@ llama3.1:8b      →    qwen2.5:32b
 
 ### 언어별 최소 길이 기준
 
-언어마다 글자 수 체계가 달라 동일 기준 적용 시 역차별 발생 → 언어별로 다르게 설정
-
 | 언어 | 질문 최소 | 답변 최소 | 이유 |
 |------|-----------|-----------|------|
 | 한국어 `ko`      | 10자 | 15자 | 형태소 압축률 높아 짧아도 의미 있음 |
@@ -206,22 +151,6 @@ llama3.1:8b      →    qwen2.5:32b
 | 인도네시아어 `id` | 20자 | 30자 | 영어와 유사한 구조 |
 | 베트남어 `vi`    | 15자 | 25자 | 중간 수준 |
 | 우즈벡어 `uz`    | 15자 | 20자 | 저자원 언어, 관대하게 적용 |
-
-**예시 비교:**
-
-```
-# 한국어 (10자 기준)
-"졸업 요건은?"       →  8자 → ❌ 제거
-"졸업 이수 학점은?"  → 11자 → ✅ 통과
-
-# 영어 (20자 기준)
-"Who is he?"                            → 10자 → ❌ 제거
-"What are the graduation requirements?" → 38자 → ✅ 통과
-
-# 우즈벡어 (15자 기준, 관대 적용)
-"Talablar nima?"      → 14자 → ❌ 제거
-"Bitirish talablari?" → 20자 → ✅ 통과
-```
 
 ---
 
@@ -239,6 +168,8 @@ output/
 │   ├── qa_vi_raw.json
 │   ├── qa_uz_raw.json
 │   └── qa_dataset_raw.json  # 통합
+├── qa_review/                # 수동 검수용
+│   └── qa_ko_pending.json
 └── qa_final/                 # Step 3 최종 출력
     ├── qa_ko_final.json
     ├── qa_en_final.json
@@ -248,3 +179,4 @@ output/
     ├── qa_dataset_final.json  # 통합
     └── qa_filter_log.json     # 필터링 로그
 ```
+
