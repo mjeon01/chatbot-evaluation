@@ -5,7 +5,6 @@ Step 2: 다국어 QA 합성 데이터 생성
   --stage ko          : 한국어 QA 생성 → 검수 파일 저장
   --stage en          : 검수된 한국어 → 영어 번역
   --stage multilingual: 영어 → ID / VI / UZ 번역
-  --stage all         : 전체 언어 직접 생성 (검수 단계 없음)
 """
 
 import os
