@@ -421,10 +421,11 @@ def stage_translate_to_english() -> None:
         elapsed = time.time() - t0
 
         ref_str = ", ".join(
-            f"{p['source']} p.{p['page']}" for p in ko_item.get("ref_pages", [])
+            f"p.{p}" if isinstance(p, int) else p if isinstance(p, str) else f"{p['source']} p.{p['page']}"
+            for p in ko_item.get("ref_pages", [])
         )
 
-        if not result or "question" not in result:
+        if not result or "question" not in result or "answer" not in result:
             print(f"  [{i+1:>3}] {ko_item['id']} → 번역 실패 ({elapsed:.1f}s), 원본 유지")
             result = {
                 "question":  ko_item["question"],
@@ -508,7 +509,7 @@ def stage_expand_multilingual() -> None:
             result  = call_model(SYSTEM_PROMPT, user_prompt)
             elapsed = time.time() - t0
 
-            if not result or "question" not in result:
+            if not result or "question" not in result or "answer" not in result:
                 print(f"  [{lang_code}] {en_item['id']} → 번역 실패 ({elapsed:.1f}s), 영어 원본 유지")
                 result = {
                     "question":  en_item["question"],
@@ -517,7 +518,8 @@ def stage_expand_multilingual() -> None:
                 }
             else:
                 ref_str = ", ".join(
-                    f"{p['source']} p.{p['page']}" for p in en_item.get("ref_pages", [])
+                    f"p.{p}" if isinstance(p, int) else p if isinstance(p, str) else f"{p['source']} p.{p['page']}"
+                    for p in en_item.get("ref_pages", [])
                 )
                 print(f"  [{i+1:>3}] {en_item['id']} → 완료 ({elapsed:.1f}s) | 참조: {ref_str}")
                 print(f"        질문: \"{result['question'][:60]}...\"")
