@@ -52,10 +52,21 @@ Bad:
 - Output language: 100% {language}
 - Avoid these already-used topics: {history}
 - Tone: natural student-to-chatbot message. No greetings.
+- The subject (who is asking) can be minimal or omitted — but the object of the question (what exactly is being asked about) MUST be specific and unambiguous. Never use vague pronouns like "it", "that", "이거", "그거" without a clear referent.
 - Answer must be detailed and grounded in the context.
 
 [Output - JSON only]
-...
+{{
+    "question": "...",
+    "answer": "...",
+    "ref_pages": [],
+    "topic_key": "short_2-3_word_keyword_in_english",
+    "persona": {{
+        "country": "...",
+        "topik_level": "...",
+        "situation": "..."
+    }}
+}}
 """
 
 # MIDDLE
@@ -72,8 +83,6 @@ Persona guidelines:
 - TOPIK 5~6 / Native: Full fluency, natural academic vocabulary.
 
 Question style by difficulty:
-- EASY: One direct fact from the context. Concise question, no long setup needed.
-  Example style: "교환학생 신청 마감일이 언제예요?"
 - MIDDLE: Include a brief personal situation before the question to explain why you're asking.
   Example style: "저 이번 학기에 전공 수업 많이 들었는데, 이수 학점이랑 졸업 조건이랑 어떻게 연결되는지 궁금해서요."
 
@@ -81,7 +90,7 @@ Question style by difficulty:
 - Output language: 100% {language}
 - Avoid these already-used topics: {history}
 - Tone: natural student-to-chatbot message. NOT formal. NOT essay style. No greetings at the start.
-- Question MUST make clear who is asking and what they want — no ambiguous pronouns.
+- The subject (who is asking) can be minimal or omitted — but the object of the question (what exactly is being asked about) MUST be specific and unambiguous. Never use vague pronouns like "it", "that", "이거", "그거" without a clear referent.
 - Question length: 100~300 tokens.
 - Answer must be detailed and grounded in the context.
 
@@ -121,6 +130,7 @@ Do NOT ask a simple factual question. The answer must walk through reasoning ste
 - Output language: 100% {language}
 - Avoid these already-used topics: {history}
 - Tone: natural student-to-chatbot message. NOT formal.
+- The subject (who is asking) can be minimal or omitted — but the object of the question (what exactly is being asked about) MUST be specific and unambiguous. Never use vague pronouns like "it", "that", "이거", "그거" without a clear referent.
 - Question MUST explicitly state the student's conditions/situation — no vague setup.
 - Question length: 100~300 tokens.
 - Answer must show the full reasoning chain before the conclusion.
@@ -161,6 +171,7 @@ For the answer, mention the specific topic and politely explain it is not in the
 [Constraints]
 - Output language: 100% {language}
 - Tone: natural student-to-chatbot message. No greetings at the start.
+- The subject (who is asking) can be minimal or omitted — but the object of the question (what exactly is being asked about) MUST be specific and unambiguous. Never use vague pronouns like "it", "that", "이거", "그거" without a clear referent.
 - Question length: 1~2 sentences (50~150 tokens). Short and natural.
 - The question must sound realistic but be unanswerable from context.
 - The answer must mention the topic and politely state it is not available.
