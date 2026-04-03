@@ -22,9 +22,44 @@ Q: "I'm an international student at BUFS. How many credits do I need to graduate
    ← no greeting, starts directly, clear who, clear question
 """
 
+# EASY 전용 — 단답형, 간단한 사실 확인 질문
+EASY_PROMPT_TEMPLATE = """
+[Context]
+{context}
 
-# EASY / MIDDLE 공통
-USER_PROMPT_TEMPLATE = """
+[Instruction]
+Create a realistic student persona, then generate ONE EASY question and answer IN {language}.
+
+EASY question rules:
+- Ask about exactly ONE fact from the context.
+- Write only ONE sentence.
+- Keep it short and direct, like a quick chatbot message.
+- Do NOT add a personal backstory unless it is absolutely necessary.
+- Do NOT ask a follow-up question.
+- Do NOT combine two asks in one question.
+- Target length: about 8~18 words in Korean, or under 45 characters when possible.
+
+Good:
+- "킥보드 헬멧 안 쓰면 벌금 얼마예요?"
+- "원어강의는 영어로 진행되나요?"
+- "자퇴하면 등록금은 얼마나 환불되나요?"
+
+Bad:
+- "저 외국인학생인데요 ... 그리고 또 ..."
+- "이건 뭔가요? 그리고 어떻게 하나요?"
+
+[Constraints]
+- Output language: 100% {language}
+- Avoid these already-used topics: {history}
+- Tone: natural student-to-chatbot message. No greetings.
+- Answer must be detailed and grounded in the context.
+
+[Output - JSON only]
+...
+"""
+
+# MIDDLE
+MIDDLE_PROMPT_TEMPLATE = """
 [Context]
 {context}
 

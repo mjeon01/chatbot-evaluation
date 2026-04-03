@@ -47,25 +47,25 @@ LANG_COUNTRY = {
 
 DIFFICULTIES = {
     "EASY": {
-        "count":          17,
+        "count":          30,
         "pages_needed":   1,
         "desc":           "단일 페이지 단순 사실 질문",
-        "max_new_tokens": 512,
+        "max_new_tokens": 256,
     },
     "MIDDLE": {
-        "count":          18,
+        "count":          30,
         "pages_needed":   "2-3",
         "desc":           "2-3페이지에 걸친 정보 연결 질문",
         "max_new_tokens": 768,
     },
     "HARD": {
-        "count":          10,
+        "count":          30,
         "pages_needed":   "3+",
         "desc":           "비교·대조·복합 추론 — 두 조건 이상 분석 필요",
         "max_new_tokens": 1536,  # 추론 체인 고려
     },
     "NOT_ANSWERABLE": {
-        "count":          5,
+        "count":          10,
         "pages_needed":   "any",
         "desc":           "환각 탐지용 — 문서에 없는 내용에 대한 그럴듯한 질문",
         "max_new_tokens": 512,
@@ -133,33 +133,47 @@ def call_model(
 
 from prompts import (
     SYSTEM_PROMPT,
-    USER_PROMPT_TEMPLATE,
+    EASY_PROMPT_TEMPLATE,
+    MIDDLE_PROMPT_TEMPLATE,
     HARD_PROMPT_TEMPLATE,
     NOT_ANSWERABLE_PROMPT_TEMPLATE,
     VALIDATE_PROMPT,
     KO_TO_EN_TEMPLATE,
     EN_TO_LANG_TEMPLATE,
 )
+
+
+def build_retrieved_chunks(selected_pages: list) -> list:
+    return [
+        {
+            "source": page.get("source", "unknown"),
+            "page": page["page"],
+            "text": page.get("content", ""),
+        }
+        for page in selected_pages
+    ]
+
+
 # 참고 문서, 페이지
-def select_context_pages(pages: list, difficulty: str) -> tuple[str, list]:
+def select_context_pages(pages: list, difficulty: str) -> tuple[str, list, list]:
     def ref(p):
         return {"source": p.get("source", "unknown"), "page": p["page"]}
 
     if difficulty == "EASY":
         page = random.choice(pages)
-        return page["content"], [ref(page)]
+        return page["content"], [ref(page)], build_retrieved_chunks([page])
     elif difficulty == "MIDDLE":
         n        = random.randint(2, 3)
         selected = random.sample(pages, min(n, len(pages)))
         selected.sort(key=lambda x: x["page"])
         context  = "\n\n".join(f"[Page {p['page']}]\n{p['content']}" for p in selected)
-        return context, [ref(p) for p in selected]
+        return context, [ref(p) for p in selected], build_retrieved_chunks(selected)
     else:  # HARD, NOT_ANSWERABLE
         n        = random.randint(3, min(5, len(pages)))
         selected = random.sample(pages, n)
         selected.sort(key=lambda x: x["page"])
         context  = "\n\n".join(f"[Page {p['page']}]\n{p['content']}" for p in selected)
-        return context, [ref(p) for p in selected]
+        return context, [ref(p) for p in selected], build_retrieved_chunks(selected)
 
 
 #  QA 생성
@@ -177,7 +191,21 @@ def build_user_prompt(
         f"{p['source']} p.{p['page']}" for p in ref_pages
     )
 
-    if difficulty == "HARD":
+    if difficulty == "EASY":
+        return EASY_PROMPT_TEMPLATE.format(
+            context  = context[:3000],
+            language = lang_name,
+            history  = history_str,
+        )
+    elif difficulty == "MIDDLE":
+        return MIDDLE_PROMPT_TEMPLATE.format(
+            context    = context[:3000],
+            difficulty = difficulty,
+            language   = lang_name,
+            history    = history_str,
+            ref_pages  = ref_str,
+        )
+    elif difficulty == "HARD":
         return HARD_PROMPT_TEMPLATE.format(
             context   = context[:3000],
             language  = lang_name,
@@ -190,14 +218,7 @@ def build_user_prompt(
             language = lang_name,
             history  = history_str,
         )
-    else:
-        return USER_PROMPT_TEMPLATE.format(
-            context    = context[:3000],
-            difficulty = difficulty,
-            language   = lang_name,
-            history    = history_str,
-            ref_pages  = ref_str,
-        )
+    raise ValueError(f"Unsupported difficulty: {difficulty}")
 
 
 def generate_single_qa(
@@ -275,7 +296,7 @@ def generate_language_dataset(lang_code: str, pages: list, output_path: str) -> 
 
         while success_count < target_count and attempt < max_attempts:
             attempt += 1
-            context, ref_pages = select_context_pages(pages, diff)
+            context, ref_pages, retrieved_chunks = select_context_pages(pages, diff)
             ref_str = ", ".join(f"{p['source']} p.{p['page']}" for p in ref_pages)
             print(f"  [{diff}] 시도 {attempt:>2} | 참조: {ref_str}")
 
@@ -304,6 +325,7 @@ def generate_language_dataset(lang_code: str, pages: list, output_path: str) -> 
                 "question":          qa["question"],
                 "answer":            qa["answer"],
                 "ref_pages":         qa.get("ref_pages", ref_pages),
+                "retrieved_chunks":  retrieved_chunks,
                 "topic_key":         topic_key,
                 "is_not_answerable": qa.get("is_not_answerable", False),
                 "reasoning_type":    qa.get("reasoning_type"),
@@ -423,6 +445,7 @@ def stage_translate_to_english() -> None:
             "question":          result["question"],
             "answer":            result["answer"],
             "ref_pages":         ko_item["ref_pages"],
+            "retrieved_chunks":  ko_item.get("retrieved_chunks", []),
             "topic_key":         result.get("topic_key", ko_item["topic_key"]),
             "is_not_answerable": ko_item.get("is_not_answerable", False),
             "reasoning_type":    ko_item.get("reasoning_type"),
@@ -508,6 +531,7 @@ def stage_expand_multilingual() -> None:
                 "question":          result["question"],
                 "answer":            result["answer"],
                 "ref_pages":         en_item["ref_pages"],
+                "retrieved_chunks":  en_item.get("retrieved_chunks", []),
                 "topic_key":         result.get("topic_key", en_item["topic_key"]),
                 "is_not_answerable": en_item.get("is_not_answerable", False),
                 "reasoning_type":    en_item.get("reasoning_type"),
